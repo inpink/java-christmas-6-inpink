@@ -43,4 +43,32 @@ class MoneyTest {
                 .hasMessageContaining(INVALID_NEGATIVE_VALUE_MESSAGE.getMessage());
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "100, 100, true", // 같음
+            "100, 50, true", // 더 큼
+            "100, 150, false" // 더 작음
+    })
+    public void 더_크거나_같은_값인지_상태값_반환(int amount, int compareTo, boolean expected) {
+        // Given
+        Money money = new TestMoney(amount);
+
+        // When && Then
+        assertThat(money.isBiggerOrSameThan(compareTo)).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "100, 150, true", // 더 작음
+            "100, 100, false", // 같음
+            "100, 50, false" // 더 큼
+    })
+    public void 더_작은_값인지_상태값_반환(int amount, int compareTo, boolean expected) {
+        // Given
+        Money money = new TestMoney(amount);
+
+        // When && Then
+        assertThat(money.isSmallerThan(compareTo)).isEqualTo(expected);
+    }
+
 }
