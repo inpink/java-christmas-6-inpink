@@ -71,4 +71,60 @@ class MoneyTest {
         assertThat(money.isSmallerThan(compareTo)).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "100, 50, 150",  // 정상적인 더하기
+            "0, 0, 0"        // 0 더하기
+    })
+    void Money끼리_더하면_새로운_Money객체(int amount1, int amount2, int expected) {
+        // Given
+        TestMoney money1 = new TestMoney(amount1);
+        TestMoney money2 = new TestMoney(amount2);
+
+        // When
+        TestMoney result = (TestMoney) money1.add(money2);
+
+        // Then
+        assertThat(money1).isNotSameAs(result);
+        assertThat(money2).isNotSameAs(result);
+        assertThat(result.getAmount()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "100, 50, 50",   // 정상적인 빼기
+            "0, 0, 0"        // 0 빼기
+    })
+    void Money끼리_빼면_새로운_Money객체(int amount1, int amount2, int expected) {
+        // Given
+        TestMoney money1 = new TestMoney(amount1);
+        TestMoney money2 = new TestMoney(amount2);
+
+        // When
+        TestMoney result = (TestMoney) money1.subtract(money2);
+
+        // Then
+        assertThat(money1).isNotSameAs(result);
+        assertThat(money2).isNotSameAs(result);
+        assertThat(result.getAmount()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "100, 10, 10",
+            "10, 1, 10",
+            "0, 100, 0"
+    })
+    void Money끼리_나누면_새로운_Money객체(int amount1, int amount2, int expected) {
+        // Given
+        TestMoney money1 = new TestMoney(amount1);
+        TestMoney money2 = new TestMoney(amount2);
+
+        // When
+        TestMoney result = (TestMoney) money1.divide(money2);
+
+        // Then
+        assertThat(result.getAmount()).isEqualTo(expected);
+    }
+
 }
