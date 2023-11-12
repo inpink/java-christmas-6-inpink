@@ -10,7 +10,7 @@ public abstract class Money<T extends Money<T>> {
     private final int amount;
 
     public Money(int amount) {
-
+        validateAmount(amount);
         this.amount = amount;
     }
 
@@ -20,5 +20,7 @@ public abstract class Money<T extends Money<T>> {
         return amount;
     }
 
-
+    protected void validateAmount(int amount) {
+        IntegerValidator.validateNotNegative(amount);
+    }
 }
