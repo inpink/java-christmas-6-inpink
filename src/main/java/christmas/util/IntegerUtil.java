@@ -2,7 +2,7 @@ package christmas.util;
 
 public class IntegerUtil {
 
-    public static boolean isInteger(String value) {
+    public static boolean isInteger(final String value) {
         try {
             Integer.parseInt(value);
             return true;
@@ -10,5 +10,6 @@ public class IntegerUtil {
             return false;
         }
     }
+
 
 }

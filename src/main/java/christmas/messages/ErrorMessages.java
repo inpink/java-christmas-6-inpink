@@ -10,7 +10,7 @@ public enum ErrorMessages {
     private final String message;
     private static final String prefix = "[ERROR] ";
 
-    ErrorMessages(String message) {
+    ErrorMessages(final String message) {
         this.message = prefix + message;
     }
 
