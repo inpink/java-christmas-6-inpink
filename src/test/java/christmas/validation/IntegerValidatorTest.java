@@ -12,7 +12,7 @@ public class IntegerValidatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"k","2200000000"})
-    public void 정수가_아니면_예외_처리(String input) {
+    public void 정수가_아니면_예외_처리(final String input) {
         assertThatThrownBy(() -> IntegerValidator.validateInteger(input, expectedMessage))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(expectedMessage);
@@ -20,13 +20,13 @@ public class IntegerValidatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"20","-20","0","2100000000"})
-    public void 정수가_맞으면_검증_통과(String input) {
+    public void 정수가_맞으면_검증_통과(final String input) {
         IntegerValidator.validateInteger(input, expectedMessage);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-20,-2100000000})
-    public void 음수면_예외_발생(int value) {
+    public void 음수면_예외_발생(final int value) {
         assertThatThrownBy(() -> IntegerValidator.validateNotNegative(value, expectedMessage))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(expectedMessage);
@@ -34,7 +34,7 @@ public class IntegerValidatorTest {
 
     @ParameterizedTest
     @ValueSource(ints = {20,0,2100000000})
-    public void 음수가_아니면_검증_통과(int value) {
+    public void 음수가_아니면_검증_통과(final int value) {
         IntegerValidator.validateNotNegative(value, expectedMessage);
     }
 
@@ -44,7 +44,7 @@ public class IntegerValidatorTest {
             "101, 1, 100",
             "100, 101, 1"
     })
-    public void 범위_밖의_값이면_예외_발생(int value, int min, int max) {
+    public void 범위_밖의_값이면_예외_발생(final int value, final int min, final int max) {
         assertThatThrownBy(() -> IntegerValidator.validateInRange(value, min, max, expectedMessage))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(expectedMessage);
@@ -56,7 +56,7 @@ public class IntegerValidatorTest {
             "1, 1, 100",
             "2, 1, 3"
     })
-    public void 범위_내의_값이면_정상_통과(int value, int min, int max) {
+    public void 범위_내의_값이면_정상_통과(final int value, final int min, final int max) {
         IntegerValidator.validateInRange(value, min, max, expectedMessage);
     }
 
@@ -65,7 +65,7 @@ public class IntegerValidatorTest {
             "0, 1",
             "-1, 1"
     })
-    public void 최소값보다_작으면_예외_발생(int value, int min) {
+    public void 최소값보다_작으면_예외_발생(final int value, final int min) {
         assertThatThrownBy(() -> IntegerValidator.validateNotSmaller(value, min, expectedMessage))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(expectedMessage);
@@ -76,7 +76,7 @@ public class IntegerValidatorTest {
             "1, 0",
             "-1, -5"
     })
-    public void 최소값보다_작지않으면_통과(int value, int min) {
+    public void 최소값보다_작지않으면_통과(final int value, final int min) {
         IntegerValidator.validateNotSmaller(value, min, expectedMessage);
     }
 
@@ -85,7 +85,7 @@ public class IntegerValidatorTest {
             "3, 1",
             "-1, -5"
     })
-    public void 최대값보다_크면_예외_발생(int value, int max) {
+    public void 최대값보다_크면_예외_발생(final int value, final int max) {
         assertThatThrownBy(() -> IntegerValidator.validateNotBigger(value, max, expectedMessage))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(expectedMessage);
@@ -96,7 +96,7 @@ public class IntegerValidatorTest {
             "0, 1",
             "-1, 5"
     })
-    public void 최소값보다_크지않으면_통과(int value, int max) {
+    public void 최소값보다_크지않으면_통과(final int value, final int max) {
         IntegerValidator.validateNotBigger(value, max, expectedMessage);
     }
 
@@ -105,7 +105,7 @@ public class IntegerValidatorTest {
             "2147483647, 1",
             "-2147483648, -1"
     })
-    public void 덧셈_범위_초과시_예외_발생(int value1, int value2) {
+    public void 덧셈_범위_초과시_예외_발생(final int value1, final int value2) {
         assertThatThrownBy(() -> IntegerValidator.validatePlusRange(value1, value2, expectedMessage))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(expectedMessage);
@@ -118,7 +118,7 @@ public class IntegerValidatorTest {
             "2147483645, 1",
             "-2147483645, -1"
     })
-    public void 덧셈_범위_초과아닐시_정상_통과(int value1, int value2) {
+    public void 덧셈_범위_초과아닐시_정상_통과(final int value1, final int value2) {
         IntegerValidator.validatePlusRange(value1, value2, expectedMessage);
     }
 

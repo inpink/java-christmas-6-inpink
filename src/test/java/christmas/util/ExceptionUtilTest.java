@@ -9,7 +9,7 @@ public class ExceptionUtilTest {
     @Test
     public void 메세지와_IllegalArgumentException발생() {
         // Given
-        String message = "This is an invalid value.";
+        final String message = "This is an invalid value.";
 
         // When && Then
         assertThatThrownBy(() -> ExceptionUtil.throwInvalidValueException(message))

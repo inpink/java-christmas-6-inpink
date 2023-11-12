@@ -15,9 +15,9 @@ public class IntegerUtilTest {
             "2200000000, false",    // 정수 범위 초과
             "hi, false"             // 숫자가 아닌 값
     })
-    void testIsInteger(String input, boolean expected) {
+    void testIsInteger(final String input, final boolean expected) {
         // When
-        boolean result = IntegerUtil.isInteger(input);
+        final boolean result = IntegerUtil.isInteger(input);
 
         // Then
         assertThat(result).isEqualTo(expected);
