@@ -1,6 +1,7 @@
 package christmas.domain.money;
 
 import static christmas.messages.ErrorMessages.INVALID_DIVISION_BY_ZERO_MESSAGE;
+import static christmas.messages.ErrorMessages.INVALID_NEGATIVE_VALUE_MESSAGE;
 
 import christmas.util.ExceptionUtil;
 import christmas.validation.IntegerValidator;
@@ -51,6 +52,6 @@ public abstract class Money<T extends Money<T>> {
     }
 
     protected void validateAmount(int amount) {
-        IntegerValidator.validateNotNegative(amount);
+        IntegerValidator.validateNotNegative(amount, INVALID_NEGATIVE_VALUE_MESSAGE.getMessage());
     }
 }
