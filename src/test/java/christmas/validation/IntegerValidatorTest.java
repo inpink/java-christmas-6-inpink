@@ -10,7 +10,7 @@ public class IntegerValidatorTest {
 
     private final String expectedMessage = "잘못된 값입니다.";
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}는 정수가 아니라 예외 처리해야 한다.")
     @ValueSource(strings = {"k","2200000000"})
     public void 정수가_아니면_예외_처리(final String input) {
         assertThatThrownBy(() -> IntegerValidator.validateInteger(input, expectedMessage))
@@ -18,13 +18,13 @@ public class IntegerValidatorTest {
                 .hasMessageContaining(expectedMessage);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}는 정수이다.")
     @ValueSource(strings = {"20","-20","0","2100000000"})
     public void 정수가_맞으면_검증_통과(final String input) {
         IntegerValidator.validateInteger(input, expectedMessage);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}는 음수라 예외 처리해야 한다.")
     @ValueSource(ints = {-20,-2100000000})
     public void 음수면_예외_발생(final int value) {
         assertThatThrownBy(() -> IntegerValidator.validateNotNegative(value, expectedMessage))
@@ -32,13 +32,13 @@ public class IntegerValidatorTest {
                 .hasMessageContaining(expectedMessage);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}는 음수가 아니다.")
     @ValueSource(ints = {20,0,2100000000})
     public void 음수가_아니면_검증_통과(final int value) {
         IntegerValidator.validateNotNegative(value, expectedMessage);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}가 {1}~{2} 범위의 값이 아니라 예외 처리해야 한다.")
     @CsvSource({
             "0, 1, 100",
             "101, 1, 100",
@@ -50,7 +50,7 @@ public class IntegerValidatorTest {
                 .hasMessageContaining(expectedMessage);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}가 {1}~{2} 범위의 값이다.")
     @CsvSource({
             "0, 0, 1",
             "1, 1, 100",
@@ -60,7 +60,7 @@ public class IntegerValidatorTest {
         IntegerValidator.validateInRange(value, min, max, expectedMessage);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}가 {1}보다 작으므로 예외 처리해야 한다.")
     @CsvSource({
             "0, 1",
             "-1, 1"
@@ -71,7 +71,7 @@ public class IntegerValidatorTest {
                 .hasMessageContaining(expectedMessage);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}가 {1}보다 작지 않다.")
     @CsvSource({
             "1, 0",
             "-1, -5"
@@ -80,7 +80,7 @@ public class IntegerValidatorTest {
         IntegerValidator.validateNotSmaller(value, min, expectedMessage);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}가 {1}보다 크므로 예외 처리해야 한다.")
     @CsvSource({
             "3, 1",
             "-1, -5"
@@ -91,7 +91,7 @@ public class IntegerValidatorTest {
                 .hasMessageContaining(expectedMessage);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}가 {1}보다 크지 않다.")
     @CsvSource({
             "0, 1",
             "-1, 5"
@@ -100,7 +100,7 @@ public class IntegerValidatorTest {
         IntegerValidator.validateNotBigger(value, max, expectedMessage);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0} + {1}은 int 범위를 초과하므로 예외 처리해야 한다.")
     @CsvSource({
             "2147483647, 1",
             "-2147483648, -1"
@@ -111,7 +111,7 @@ public class IntegerValidatorTest {
                 .hasMessageContaining(expectedMessage);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0} + {1}은 int 범위를 초과하지 않는다.")
     @CsvSource({
             "0, 0",
             "1, 2",

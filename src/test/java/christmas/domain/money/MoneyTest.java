@@ -21,7 +21,7 @@ class MoneyTest {
         }
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "정상 {0} 값을 담은 Money 객체가 생성되어야 한다.")
     @ValueSource(ints = {100, 200, 2100000000, 0})
     public void 정상_Money_자식_객체_생성(final int amount) {
         // When
@@ -31,7 +31,7 @@ class MoneyTest {
         assertThat(money.getAmount()).isEqualTo(amount);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "음수 {0} 값을 담은 Money 객체를 생성하면 예외 처리해야 한다.")
     @ValueSource(ints = {-1, -2100000000})
     public void Money는_음수값을_가질_수_없음(final int amount) {
         // When && Then
@@ -40,7 +40,7 @@ class MoneyTest {
                 .hasMessageContaining("[ERROR] 음수값은 사용할 수 없습니다.");
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "두 Money의 값을 비교하여 {0}이 {1}보다 크거나 같은지는 {2}여야 한다.")
     @CsvSource({
             "100, 100, true", // 같음
             "100, 50, true", // 더 큼
@@ -54,7 +54,7 @@ class MoneyTest {
         assertThat(money.isBiggerOrSameThan(compareTo)).isEqualTo(expected);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "두 Money의 값을 비교하여 {0}이 {1}보다 작은지는 {2}여야 한다.")
     @CsvSource({
             "100, 150, true", // 더 작음
             "100, 100, false", // 같음
@@ -68,7 +68,7 @@ class MoneyTest {
         assertThat(money.isSmallerThan(compareTo)).isEqualTo(expected);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "두 Money의 값끼리 더해서 {0} + {1} = {2}여야 한다.")
     @CsvSource({
             "100, 50, 150",  // 정상적인 더하기
             "0, 0, 0"        // 0 더하기
@@ -87,7 +87,7 @@ class MoneyTest {
         assertThat(result.getAmount()).isEqualTo(expected);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "두 Money의 값끼리 빼서 {0} - {1} = {2}여야 한다.")
     @CsvSource({
             "100, 50, 50",   // 정상적인 빼기
             "0, 0, 0"        // 0 빼기
@@ -106,7 +106,7 @@ class MoneyTest {
         assertThat(result.getAmount()).isEqualTo(expected);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "두 Money의 값끼리 나눠서 {0} / {1} = {2}여야 한다.")
     @CsvSource({
             "100, 10, 10",
             "10, 1, 10",
@@ -136,7 +136,7 @@ class MoneyTest {
                 .hasMessageContaining("[ERROR] 0으로 나눌 수없습니다.");
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "두 Money의 값끼리 나머지를 계산해서 {0} % {1} = {2}여야 한다.")
     @CsvSource({
             "100, 30, 10",   // 정상적인 나머지 연산
             "0, 30, 0"       // 0 나머지 연산

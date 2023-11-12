@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class IntegerUtilTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}가 정수인지 물어보면 {1}다.")
     @CsvSource({
             "2000000000, true",     // 정상 범위의 정수
             "-2000000000, true",    // 음수 정수

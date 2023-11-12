@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class MenuTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "아이템 {0}가 {1} 메뉴에 해당되어야 한다.")
     @CsvSource({
             "양송이수프, APPETIZERS",
             "티본스테이크, MAIN_DISHES",
@@ -23,7 +23,7 @@ public class MenuTest {
         assertThat(result).isEqualTo(expectedMenuName);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "아이템 {0} 메뉴에 없기에 예외가 발생해야 한다.")
     @CsvSource({
             "없는음식",
             "안팔아요",
@@ -38,14 +38,16 @@ public class MenuTest {
                 .hasMessageContaining("존재하지 않는 메뉴입니다.");
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "메뉴 {0}에 아이템 {1}가 있는지 확인하면 {2}다.")
     @CsvSource({
             "DESSERTS, 초코케이크, true",
             "DESSERTS, 도마뱀수프, false",
             "DRINKS, 샴페인, true",
             "DRINKS, 버터맥주, false"
     })
-    public void contains_테스트(final Menu menu, final String itemName, final boolean expected) {
+    public void 해당_메뉴에_특정_아이템이름이_들어있는지_상태_확인(final Menu menu,
+                                             final String itemName,
+                                             final boolean expected) {
         // When
         final boolean result = menu.contains(itemName);
 
