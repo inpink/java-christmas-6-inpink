@@ -35,4 +35,8 @@ public enum Menu { //이미 정해져있으니까 enum. 만약 매번 새롭게 
                 .orElseThrow(() -> ExceptionUtil.returnInvalidValueException(NOT_EXIST_MENU.getMessage()));
     }
 
+    public boolean contains(final String itemName) {
+        return Arrays.stream(items)
+                .anyMatch(item -> item.getName().equalsIgnoreCase(itemName));
+    }
 }
