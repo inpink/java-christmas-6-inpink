@@ -2,8 +2,13 @@ package christmas.util;
 
 public class IntegerUtil {
 
-
-    public static boolean isNegative(int value) {
-        return value < 0;
+    public static boolean isInteger(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
     }
+
 }
