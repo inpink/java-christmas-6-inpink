@@ -5,6 +5,8 @@ import static christmas.messages.OutputMessages.ANNOUNCE_MAX_MENU_COUNT;
 import static christmas.messages.OutputMessages.ANNOUNCE_MININUM_EVENT_APPLY_PRICE;
 import static christmas.messages.OutputMessages.WELCOME_MESSAGE;
 
+import christmas.domain.menu.Item;
+import christmas.domain.menu.Menu;
 import christmas.util.OutputUtil;
 
 public class ConsoleOutputView implements OutputView {
@@ -25,6 +27,13 @@ public class ConsoleOutputView implements OutputView {
 
     @Override
     public void outputMenu() {
-
+        for (Menu menu : Menu.values()) {
+            System.out.println("<" + menu.getDescription() + ">");
+            for (Item item : menu.getItems()) {
+                System.out.println(item.getName() + "(" + item.getPrice() + ")");
+            }
+            OutputUtil.printEmptyLine();
+        }
+        OutputUtil.printEmptyLine();
     }
 }
