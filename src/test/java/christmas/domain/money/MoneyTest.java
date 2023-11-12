@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static christmas.messages.ErrorMessages.INVALID_DIVISION_BY_ZERO_MESSAGE;
 import static christmas.messages.ErrorMessages.INVALID_NEGATIVE_VALUE_MESSAGE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -40,7 +39,7 @@ class MoneyTest {
         // When && Then
         assertThatThrownBy(() -> new TestMoney(amount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_NEGATIVE_VALUE_MESSAGE.getMessage());
+                .hasMessageContaining("[ERROR] 음수값은 사용할 수 없습니다.");
     }
 
     @ParameterizedTest
@@ -136,7 +135,7 @@ class MoneyTest {
         // When && Then
         assertThatThrownBy(() -> money1.divide(money2))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_DIVISION_BY_ZERO_MESSAGE.getMessage());
+                .hasMessageContaining("[ERROR] 0으로 나눌 수없습니다.");
     }
 
     @ParameterizedTest
@@ -165,6 +164,6 @@ class MoneyTest {
         // When && Then
         assertThatThrownBy(() -> money1.calculateRemainder(money2))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_DIVISION_BY_ZERO_MESSAGE.getMessage());
+                .hasMessageContaining("[ERROR] 0으로 나눌 수없습니다.");
     }
 }
