@@ -24,7 +24,18 @@ public class IntegerValidatorTest {
         IntegerValidator.validateInteger(input, expectedMessage);
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {-20,-2100000000})
+    public void 음수면_예외_발생(int value) {
+        assertThatThrownBy(() -> IntegerValidator.validateNotNegative(value, expectedMessage))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(expectedMessage);
+    }
 
-
+    @ParameterizedTest
+    @ValueSource(ints = {20,0,2100000000})
+    public void 음수가_아니면_검증_통과(int value) {
+        IntegerValidator.validateNotNegative(value, expectedMessage);
+    }
 
 }
