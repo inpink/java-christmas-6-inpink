@@ -6,4 +6,7 @@ public interface Item {
 
     int getPrice();
 
+    default boolean hasName(String name) {
+        return getName().equalsIgnoreCase(name);
+    }
 }

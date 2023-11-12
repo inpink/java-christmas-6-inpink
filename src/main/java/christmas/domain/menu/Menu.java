@@ -1,5 +1,8 @@
 package christmas.domain.menu;
 
+import static christmas.messages.ErrorMessages.NOT_EXIST_MENU;
+
+import christmas.util.ExceptionUtil;
 import java.util.Arrays;
 
 public enum Menu { //이미 정해져있으니까 enum. 만약 매번 새롭게 만들어준다면 abstract class 썼을것
@@ -16,5 +19,20 @@ public enum Menu { //이미 정해져있으니까 enum. 만약 매번 새롭게 
         this.items = items;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public Item[] getItems() {
+        return items;
+    }
+
+    public static Menu findMenuType(final String itemName) {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> Arrays.stream(menu.items)
+                        .anyMatch(item -> item.hasName(itemName)))
+                .findFirst()
+                .orElseThrow(() -> ExceptionUtil.returnInvalidValueException(NOT_EXIST_MENU.getMessage()));
+    }
 
 }
