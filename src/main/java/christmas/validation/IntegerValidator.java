@@ -35,4 +35,14 @@ public class IntegerValidator {
         }
     }
 
+    public static void validatePlusRange(final int value1, final int value2, final String errorMessage) {
+        final BigInteger a = BigInteger.valueOf(value1);
+        final BigInteger b = BigInteger.valueOf(value2);
+        final BigInteger result = a.add(b);
+
+        if (result.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0 ||
+                result.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) < 0) {
+            ExceptionUtil.throwInvalidValueException(errorMessage);
+        }
+    }
 }
