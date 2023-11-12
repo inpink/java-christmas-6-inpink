@@ -60,5 +60,25 @@ public class IntegerValidatorTest {
         IntegerValidator.validateInRange(value, min, max, expectedMessage);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "0, 1",
+            "-1, 1"
+    })
+    public void 최소값보다_작으면_예외_발생(int value, int min) {
+        assertThatThrownBy(() -> IntegerValidator.validateNotSmaller(value, min, expectedMessage))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(expectedMessage);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1, 0",
+            "-1, -5"
+    })
+    public void 최소값보다_작지않으면_통과(int value, int min) {
+        IntegerValidator.validateNotSmaller(value, min, expectedMessage);
+    }
+
 
 }
