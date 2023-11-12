@@ -20,6 +20,14 @@ public abstract class Money<T extends Money<T>> {
         return amount;
     }
 
+    public boolean isBiggerOrSameThan(final int amount) {
+        return this.amount >= amount;
+    }
+
+    public boolean isSmallerThan(final int amount) {
+        return this.amount < amount;
+    }
+
     protected void validateAmount(int amount) {
         IntegerValidator.validateNotNegative(amount);
     }
