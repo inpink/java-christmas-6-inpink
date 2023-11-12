@@ -80,5 +80,24 @@ public class IntegerValidatorTest {
         IntegerValidator.validateNotSmaller(value, min, expectedMessage);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "3, 1",
+            "-1, -5"
+    })
+    public void 최대값보다_크면_예외_발생(int value, int max) {
+        assertThatThrownBy(() -> IntegerValidator.validateNotBigger(value, max, expectedMessage))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(expectedMessage);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0, 1",
+            "-1, 5"
+    })
+    public void 최소값보다_크지않으면_통과(int value, int max) {
+        IntegerValidator.validateNotBigger(value, max, expectedMessage);
+    }
 
 }
