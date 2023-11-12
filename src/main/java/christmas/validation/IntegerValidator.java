@@ -10,7 +10,12 @@ public class IntegerValidator {
         if (!IntegerUtil.isInteger(string)) {
             ExceptionUtil.throwInvalidValueException(errorMessage);
         }
-    }  //
+    }
 
+    public static void validateNotNegative(final int value, final String errorMessage) {
+        if (value < 0) {
+            ExceptionUtil.throwInvalidValueException(errorMessage);
+        }
+    }
 
 }
