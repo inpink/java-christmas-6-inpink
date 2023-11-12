@@ -127,4 +127,17 @@ class MoneyTest {
         assertThat(result.getAmount()).isEqualTo(expected);
     }
 
+    @Test
+    void Money는_0으로_나눌_수_없음() {
+        // Given
+        TestMoney money1 = new TestMoney(100);
+        TestMoney money2 = new TestMoney(0);
+
+        // When && Then
+        assertThatThrownBy(() -> money1.divide(money2))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(INVALID_DIVISION_BY_ZERO_MESSAGE.getMessage());
+    }
+
+
 }
