@@ -18,4 +18,21 @@ public class IntegerValidator {
         }
     }
 
+    public static void validateInRange(final int value, final int min, final int max, final String errorMessage) {
+        validateNotSmaller(value, min, errorMessage);
+        validateNotBigger(value, max, errorMessage);
+    }
+
+    public static void validateNotSmaller(final int value, final int min, final String errorMessage) {
+        if (value < min) {
+            ExceptionUtil.throwInvalidValueException(errorMessage);
+        }
+    }
+
+    public static void validateNotBigger(final int value, final int max, final String errorMessage) {
+        if (value > max) {
+            ExceptionUtil.throwInvalidValueException(errorMessage);
+        }
+    }
+
 }
