@@ -139,5 +139,32 @@ class MoneyTest {
                 .hasMessageContaining(INVALID_DIVISION_BY_ZERO_MESSAGE.getMessage());
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "100, 30, 10",   // 정상적인 나머지 연산
+            "0, 30, 0"       // 0 나머지 연산
+    })
+    void Money끼리_나머지_계산하면_새로운_Money객체(int amount1, int amount2, int expected) {
+        // Given
+        TestMoney money1 = new TestMoney(amount1);
+        TestMoney money2 = new TestMoney(amount2);
 
+        // When
+        TestMoney result = (TestMoney) money1.calculateRemainder(money2);
+
+        // Then
+        assertThat(result.getAmount()).isEqualTo(expected);
+    }
+
+    @Test
+    void Money는_나머지_계산시_0으로_나눌_수_없음() {
+        // Given
+        TestMoney money1 = new TestMoney(100);
+        TestMoney money2 = new TestMoney(0);
+
+        // When && Then
+        assertThatThrownBy(() -> money1.calculateRemainder(money2))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(INVALID_DIVISION_BY_ZERO_MESSAGE.getMessage());
+    }
 }
