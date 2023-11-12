@@ -38,4 +38,27 @@ public class IntegerValidatorTest {
         IntegerValidator.validateNotNegative(value, expectedMessage);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "0, 1, 100",
+            "101, 1, 100",
+            "100, 101, 1"
+    })
+    public void 범위_밖의_값이면_예외_발생(int value, int min, int max) {
+        assertThatThrownBy(() -> IntegerValidator.validateInRange(value, min, max, expectedMessage))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(expectedMessage);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0, 0, 1",
+            "1, 1, 100",
+            "2, 1, 3"
+    })
+    public void 범위_내의_값이면_정상_통과(int value, int min, int max) {
+        IntegerValidator.validateInRange(value, min, max, expectedMessage);
+    }
+
+
 }
