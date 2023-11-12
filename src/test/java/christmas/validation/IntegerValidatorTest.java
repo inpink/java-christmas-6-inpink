@@ -100,4 +100,26 @@ public class IntegerValidatorTest {
         IntegerValidator.validateNotBigger(value, max, expectedMessage);
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "2147483647, 1",
+            "-2147483648, -1"
+    })
+    public void 덧셈_범위_초과시_예외_발생(int value1, int value2) {
+        assertThatThrownBy(() -> IntegerValidator.validatePlusRange(value1, value2, expectedMessage))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(expectedMessage);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0, 0",
+            "1, 2",
+            "2147483645, 1",
+            "-2147483645, -1"
+    })
+    public void 덧셈_범위_초과아닐시_정상_통과(int value1, int value2) {
+        IntegerValidator.validatePlusRange(value1, value2, expectedMessage);
+    }
+
 }
