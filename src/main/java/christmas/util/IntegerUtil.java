@@ -1,6 +1,6 @@
 package christmas.util;
 
-public class IntegerUtil {
+public final class IntegerUtil {
 
     public static boolean isInteger(final String value) {
         try {

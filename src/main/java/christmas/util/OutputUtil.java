@@ -1,6 +1,6 @@
 package christmas.util;
 
-public class OutputUtil {
+public final class OutputUtil {
     public static void printEmptyLine() {
         System.out.println();
     }
