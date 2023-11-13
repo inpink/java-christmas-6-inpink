@@ -1,6 +1,6 @@
 package christmas.domain.event;
 
-import christmas.domain.money.DiscountPrice;
+import christmas.domain.entity.Money;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -25,7 +25,7 @@ public class ChristmasDayDiscountEventTest {
 
         // When
         final Benefit benefit = ChristmasDayDiscountEvent.calculateBenefit(date);
-        final DiscountPrice discountPrice = benefit.getDiscountPrice();
+        final Money discountPrice = benefit.getDiscountPrice();
 
         // Then
         assertThat(discountPrice.getAmount()).isEqualTo(expectedAmount);

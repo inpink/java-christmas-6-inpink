@@ -1,20 +1,19 @@
 package christmas.domain.event;
 
-import christmas.domain.money.DiscountPrice;
+import christmas.domain.entity.Money;
 
 public class Benefit {
 
-
-    private final DiscountPrice discountPrice;
+    private final Money discountPrice;
     private final Gifts gifts;
 
-    public Benefit(DiscountPrice discountPrice) {
-        this.discountPrice=discountPrice;
+    public Benefit(Money discountPrice) {
+        this.discountPrice = discountPrice;
         this.gifts = null;
     }
 
 
-    public DiscountPrice getDiscountPrice() {
+    public Money getDiscountPrice() {
         return discountPrice;
     }
 
@@ -27,18 +26,18 @@ public class Benefit {
         this.gifts = gifts;
     }
 
-    public Benefit(DiscountPrice discountPrice, Gifts gifts) {
+    public Benefit(final Money discountPrice, final Gifts gifts) {
         this.discountPrice = discountPrice;
         this.gifts = gifts;
     }
 
     public Benefit() {
-        this.discountPrice=null;
-        this.gifts=null;
+        this.discountPrice = null;
+        this.gifts = null;
     }
 
     public static Benefit createEmpty() {
-        return new Benefit(new DiscountPrice(0), null);
+        return new Benefit(Money.createEmpty(), null);
     }
 
     public boolean isNull() {

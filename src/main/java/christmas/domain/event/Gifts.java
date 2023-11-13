@@ -1,7 +1,7 @@
 package christmas.domain.event;
 
+import christmas.domain.entity.Money;
 import christmas.domain.menu.Item;
-import christmas.domain.money.DiscountPrice;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +16,9 @@ public class Gifts {
         return new Gifts(new ArrayList<>());
     }
 
-    public DiscountPrice calcMoney() {
-        ItemPrice total = gifts.stream()
-                .mapToInt(Item::getPrice)
-                .sum();
-        return new DiscountPrice(total);
+    public Money calcMoney() {
+        return gifts.stream()
+                .map(Item::getPrice)
+                .reduce(Money.createEmpty(), Money::add);
     }
 }

@@ -1,6 +1,6 @@
 package christmas.domain.menu;
 
-import christmas.domain.money.ItemPrice;
+import christmas.domain.entity.Money;
 
 public enum Drink implements Item {
     ZERO_COKE("제로콜라", 3_000),
@@ -8,11 +8,11 @@ public enum Drink implements Item {
     Champagne("샴페인", 25_000);
 
     private final String name;
-    private final ItemPrice price;
+    private final Money price;
 
     Drink(final String name, final int price) {
         this.name = name;
-        this.price = new ItemPrice(price);
+        this.price = Money.create(price);
     }
 
     @Override
@@ -21,7 +21,7 @@ public enum Drink implements Item {
     }
 
     @Override
-    public ItemPrice getPrice() {
+    public Money getPrice() {
         return price;
     }
 }

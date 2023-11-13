@@ -6,7 +6,7 @@ import static christmas.domain.event.ChristmasDayDiscountEvent.DiscountAmount.DA
 import static christmas.domain.event.ChristmasDayDiscountEvent.DiscountAmount.STANDARD;
 import static java.time.temporal.ChronoUnit.DAYS;
 
-import christmas.domain.money.DiscountPrice;
+import christmas.domain.entity.Money;
 import java.time.LocalDate;
 
 public enum ChristmasDayDiscountEvent { //정해진 조건을 상수로 관리한다는 느낌을 더욱 주고 싱글톤의 장점도
@@ -32,15 +32,15 @@ public enum ChristmasDayDiscountEvent { //정해진 조건을 상수로 관리�
                 || date.isAfter(DISCOUNT_CONDITIONS.endDate));
     }
 
-    private static DiscountPrice calcDiscountPrice(final LocalDate date) {
-        final DiscountPrice dailySurcharge = calculateDailySurcharge(date);
-        return (DiscountPrice) dailySurcharge.add(STANDARD.amount);
+    private static Money calcDiscountPrice(final LocalDate date) {
+        final Money dailySurcharge = calculateDailySurcharge(date);
+        return dailySurcharge.add(STANDARD.amount);
     }
 
-    private static DiscountPrice calculateDailySurcharge(final LocalDate date) {
+    private static Money calculateDailySurcharge(final LocalDate date) {
         final int daysSinceStart = (int) DAYS.between(DISCOUNT_CONDITIONS.startDate, date);
-        final DiscountPrice oneDaySurcharge = DAILY_SURCHARGE.amount;
-        return (DiscountPrice) oneDaySurcharge.multiply(daysSinceStart);
+        final Money oneDaySurcharge = DAILY_SURCHARGE.amount;
+        return oneDaySurcharge.multiply(daysSinceStart);
     }
 
     enum DiscountAmount {
@@ -48,10 +48,10 @@ public enum ChristmasDayDiscountEvent { //정해진 조건을 상수로 관리�
         STANDARD(1000),
         DAILY_SURCHARGE(100);
 
-        private final DiscountPrice amount;
+        private final Money amount;
 
         DiscountAmount(final int amount) {
-            this.amount = new DiscountPrice(amount);
+            this.amount = Money.create(amount);
         }
     }
 }

@@ -2,7 +2,7 @@ package christmas.domain.event;
 
 import static christmas.messages.ErrorMessages.INVALID_BADGE_PRICE;
 
-import christmas.domain.money.DiscountPrice;
+import christmas.domain.entity.Money;
 import christmas.util.ExceptionUtil;
 import java.util.Arrays;
 
@@ -14,16 +14,16 @@ public enum Badge {
     SANTA("산타", 20_000, Integer.MAX_VALUE);
 
     private final String name;
-    private final DiscountPrice minBenefitsPrice;
-    private final DiscountPrice maxBenefitsPrice;
+    private final Money minBenefitsPrice;
+    private final Money maxBenefitsPrice;
 
     Badge(final String name, final int minBenefitsPrice, final int maxBenefitsPrice) {
         this.name = name;
-        this.minBenefitsPrice = new DiscountPrice(minBenefitsPrice);
-        this.maxBenefitsPrice = new DiscountPrice(maxBenefitsPrice);
+        this.minBenefitsPrice = Money.create(minBenefitsPrice);
+        this.maxBenefitsPrice = Money.create(maxBenefitsPrice);
     }
 
-    public static Badge getBadgeByPrice(final DiscountPrice price) {
+    public static Badge getBadgeByPrice(final Money price) {
         return Arrays.stream(Badge.values())
                 .filter(badge -> price.isInRange(badge.minBenefitsPrice, badge.maxBenefitsPrice))
                 .findFirst()
