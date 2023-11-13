@@ -49,6 +49,13 @@ public abstract class Money<T extends Money<T>> {
         return create(this.amount - other.amount);
     }
 
+    public T multiply(final Money<?> other) {
+        return create(this.amount * other.amount);
+    }
+
+    public T multiply(final int value) {
+        return create(this.amount * value);
+    }
     public T divide(final Money<?> other) {
         if (other.amount == 0) {
             ExceptionUtil.throwInvalidValueException(INVALID_DIVISION_BY_ZERO.getMessage());
@@ -63,7 +70,7 @@ public abstract class Money<T extends Money<T>> {
         return create(this.amount % other.amount);
     }
 
-    protected void validate(int amount) {
+    private void validate(int amount) {
         IntegerValidator.validateNotNegative(amount, INVALID_NEGATIVE_VALUE.getMessage());
     }
 
