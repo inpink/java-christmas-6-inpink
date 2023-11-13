@@ -1,7 +1,7 @@
 package christmas.domain.money;
 
-import static christmas.messages.ErrorMessages.INVALID_DIVISION_BY_ZERO_MESSAGE;
-import static christmas.messages.ErrorMessages.INVALID_NEGATIVE_VALUE_MESSAGE;
+import static christmas.messages.ErrorMessages.INVALID_DIVISION_BY_ZERO;
+import static christmas.messages.ErrorMessages.INVALID_NEGATIVE_VALUE;
 
 import christmas.util.ExceptionUtil;
 import christmas.validation.IntegerValidator;
@@ -39,19 +39,19 @@ public abstract class Money<T extends Money<T>> {
 
     public T divide(final Money<?> other) {
         if (other.amount == 0) {
-            ExceptionUtil.throwInvalidValueException(INVALID_DIVISION_BY_ZERO_MESSAGE.getMessage());
+            ExceptionUtil.throwInvalidValueException(INVALID_DIVISION_BY_ZERO.getMessage());
         }
         return create(this.amount / other.amount);
     }
 
     public T calculateRemainder(final Money<?> other) {
         if (other.amount == 0) {
-            ExceptionUtil.throwInvalidValueException(INVALID_DIVISION_BY_ZERO_MESSAGE.getMessage());
+            ExceptionUtil.throwInvalidValueException(INVALID_DIVISION_BY_ZERO.getMessage());
         }
         return create(this.amount % other.amount);
     }
 
     protected void validateAmount(int amount) {
-        IntegerValidator.validateNotNegative(amount, INVALID_NEGATIVE_VALUE_MESSAGE.getMessage());
+        IntegerValidator.validateNotNegative(amount, INVALID_NEGATIVE_VALUE.getMessage());
     }
 }
