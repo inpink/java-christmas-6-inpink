@@ -45,7 +45,7 @@ public class Items {
 
         for (final String itemNameAndCount : toList(input)) {
             final String[] parts = itemNameAndCount.split("-"); //TODO: 상수화
-            IntegerValidator.validateNotSame(parts.length, 2, errorMessge);
+            IntegerValidator.validateSame(parts.length, 2, errorMessge);
 
             final Item item = Menu.findItem(parts[0]);
             final ItemCount itemCount = ItemCount.create(parts[1]);
