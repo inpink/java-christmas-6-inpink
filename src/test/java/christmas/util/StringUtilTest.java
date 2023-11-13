@@ -21,5 +21,19 @@ public class StringUtilTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @ParameterizedTest(name = "정수 {0}의 모든 공백을 제거하면 {1}다.")
+    @CsvSource({
+            "'Hello World', 'HelloWorld'",
+            "' Java Programming ', 'JavaProgramming'",
+            "'123 456 789', '123456789'",
+            "'', ''"
+    })
+    void 문자열의_모든_공백을_제거(String input, String expected) {
+        // When
+        String result = StringUtil.removeAllSpaces(input);
+
+        // Then
+        assertThat(StringUtil.removeAllSpaces(result)).isEqualTo(expected);
+    }
 
 }
