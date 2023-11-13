@@ -42,7 +42,7 @@ public enum WeekDiscountEvent { //YES or NO 판단하는 용도만 (계산기라
         if (!isMeetingConditions(date, menu)) {
             return Benefit.createEmpty();
         }
-        return new Benefit(calcDiscountPrice());
+        return Benefit.create(calcDiscountPrice());
     }
 
     private static boolean isMeetingConditions(final LocalDate date, final Menu menu) {

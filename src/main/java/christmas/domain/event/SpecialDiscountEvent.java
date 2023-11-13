@@ -25,7 +25,7 @@ public enum SpecialDiscountEvent {
         if (!isMeetingConditions(date)) {
             return Benefit.createEmpty();
         }
-        return new Benefit(calcDiscountPrice());
+        return Benefit.create(calcDiscountPrice());
     }
 
     private static boolean isMeetingConditions(final LocalDate date) {
