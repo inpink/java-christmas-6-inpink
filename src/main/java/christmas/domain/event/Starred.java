@@ -18,7 +18,16 @@ public enum Starred {
         this.dates = toLocalDateSet(days);
     }
 
+    public static boolean isStarred(final LocalDate date) {
+        return YES.isContaining(date);
+    }
 
+    public static Starred findStarred(final LocalDate date) {
+        return Arrays.stream(Starred.values())
+                .filter(starred -> starred.isContaining(date))
+                .findFirst()
+                .orElse(NO);
+    }
 
     private Set<LocalDate> toLocalDateSet(final Set<Integer> days) {
         return days.stream()
@@ -26,5 +35,7 @@ public enum Starred {
                 .collect(Collectors.toSet());
     }
 
-
+    private boolean isContaining(final LocalDate date) {
+        return dates.contains(date);
+    }
 }
