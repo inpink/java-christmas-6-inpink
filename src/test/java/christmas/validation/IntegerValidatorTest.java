@@ -133,4 +133,28 @@ public class IntegerValidatorTest {
         IntegerValidator.validatePlusRange(value1, value2, expectedMessage);
     }
 
+    @ParameterizedTest(name = "{0}와 {1}는 서로 다르기에 예외 처리한다.")
+    @CsvSource({
+            "0, 1",
+            "1, 2",
+            "2147483645, 2147483644",
+            "-2147483645, 2147483645"
+    })
+    public void 두_값이_다르면_예외_발생(final int value1, final int value2) {
+        assertThatThrownBy(() -> IntegerValidator.validateSame(value1, value2, expectedMessage))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(expectedMessage);
+    }
+
+    @ParameterizedTest(name = "{0}와 {1}는 서로 같다.")
+    @CsvSource({
+            "1, 1",
+            "2, 2",
+            "0, 0",
+            "-2147483645, -2147483645"
+    })
+    public void 두_값이_같으면_정상_통과(final int value1, final int value2) {
+        IntegerValidator.validateSame(value1, value2, expectedMessage);
+    }
+
 }
