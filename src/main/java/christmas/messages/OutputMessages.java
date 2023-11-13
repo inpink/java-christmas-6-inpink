@@ -1,16 +1,14 @@
 package christmas.messages;
 
-import static christmas.constants.IntegerConstants.MAX_MENU_COUNT;
-import static christmas.constants.IntegerConstants.MINIMUM_EVENT_APPLY_PRICE;
-
 public enum OutputMessages {
-    WELCOME_MESSAGE("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."),
-    ANNOUNCE_MININUM_EVENT_APPLY_PRICE(
-            String.format("총주문 금액 %,d원 이상부터 이벤트가 적용됩니다.", MINIMUM_EVENT_APPLY_PRICE.getValue())),
-
-    ANNOUNCE_BEVERAGE_ONLY_NOT_ORDERABLE("음료만 주문 시 주문할 수 없습니다."),
-    ANNOUNCE_MAX_MENU_COUNT(
-            String.format("메뉴는 한 번에 최대 %d개 까지만 주문할 수 있습니다.", MAX_MENU_COUNT.getValue()));
+    PREVIEW_TITLE_MESSAGE("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"),
+    ORDER_MENU_TITLE_MESSAGE("주문 메뉴"),
+    TOTAL_PRICE_BEFORE_DISCOUNT_TITLE_MESSAGE("할인 전 총주문 금액"),
+    GIFT_MENU_TITLE_MESSAGE("증정 메뉴"),
+    BENEFITS_TITLE_MESSAGE("혜택 내역"),
+    TOTAL_BENEFITS_PRICE_TITLE_MESSAGE("총혜택 금액"),
+    TOTAL_PRICE_AFTER_DISCOUNT_TITLE_MESSAGE("할인 후 예상 결제 금액"),
+    DECEMBER_EVENT_BADGE_TITLE_MESSAGE("12월 이벤트 배지");
 
     private final String message;
 
