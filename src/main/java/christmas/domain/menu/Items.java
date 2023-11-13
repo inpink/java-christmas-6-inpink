@@ -40,6 +40,32 @@ public class Items {
                 .sum();
     }
 
+    private static HashMap<Item, ItemCount> toMap(final String input) {
+        final HashMap<Item, ItemCount> items = new HashMap<>();
+
+        for (final String itemNameAndCount : toList(input)) {
+            final String[] parts = itemNameAndCount.split("-"); //TODO: 상수화
+            IntegerValidator.validateNotSame(parts.length, 2, errorMessge);
+
+            final Item item = Menu.findItem(parts[0]);
+            final ItemCount itemCount = ItemCount.create(parts[1]);
+
+            MapValidator.validateDuplicateKey(items, item, errorMessge);
+            items.put(item, itemCount);
+        }
+
+        return items;
+    }
+
+    private static List<String> toList(final String input) {
+        final List<String> itemNamesAndCounts = StringListUtil.seperateBy(input, SEPERATE_STANDARD.getValue())
+                .stream()
+                .filter(s -> !s.isEmpty())
+                .toList();
+
+        return itemNamesAndCounts;
+    }
+
 
     private void validateSumOfCounts() {
         if (calcItemCounts() > MAX_MENU_ITEM_COUNT.getValue()) {

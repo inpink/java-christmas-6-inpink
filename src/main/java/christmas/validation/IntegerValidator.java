@@ -51,4 +51,10 @@ public final class IntegerValidator {
             ExceptionUtil.throwInvalidValueException(errorMessage);
         }
     }
+
+    public static void validateNotSame(final int value1, final int value2, final String errorMessage) {
+        if (value1 != value2) {
+            ExceptionUtil.throwInvalidValueException(errorMessage);
+        }
+    }
 }
