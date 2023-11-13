@@ -3,6 +3,7 @@ package christmas.validation;
 import christmas.util.ExceptionUtil;
 import christmas.util.IntegerUtil;
 import java.math.BigInteger;
+import java.util.Arrays;
 
 public class IntegerValidator {
 
@@ -10,6 +11,11 @@ public class IntegerValidator {
         if (!IntegerUtil.isInteger(string)) {
             ExceptionUtil.throwInvalidValueException(errorMessage);
         }
+    }
+
+    public static void validateInteger(final String errorMessage, final String... strings) {
+        Arrays.stream(strings)
+                .forEach(string -> validateInteger(string, errorMessage));
     }
 
     public static void validateNotNegative(final int value, final String errorMessage) {

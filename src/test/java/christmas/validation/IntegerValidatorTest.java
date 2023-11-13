@@ -24,6 +24,17 @@ public class IntegerValidatorTest {
         IntegerValidator.validateInteger(input, expectedMessage);
     }
 
+    @ParameterizedTest(name = "{0}, {1}, {2} 중 하나 이상은 정수가 아니라 예외 처리해야 한다.")
+    @CsvSource({
+            "2200000000, 12, 0",
+            "2, 1, -2170000000"
+    })
+    public void 여러개_중에_하나라도_정수가_아니면_예외처리(final String input1, final String input2, final String input3) {
+        assertThatThrownBy(() -> IntegerValidator.validateInteger(expectedMessage, input1, input2, input3))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(expectedMessage);
+    }
+
     @ParameterizedTest(name = "{0}는 음수라 예외 처리해야 한다.")
     @ValueSource(ints = {-20,-2100000000})
     public void 음수면_예외_발생(final int value) {
