@@ -2,6 +2,7 @@ package christmas.validation;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class DateValidatorTest {
@@ -15,7 +16,7 @@ class DateValidatorTest {
             "2021, 1, 31",
             "2021, 01, 01"
     })
-    void 달력에_있는_옳은_날짜_검증_통과(String year, String month, String day) {
+    public void 달력에_있는_옳은_날짜_검증_통과(final String year, final String month, final String day) {
         // When
         DateValidator.validateExistInCalendar(year, month, day, expectedMessage);
     }
@@ -29,7 +30,7 @@ class DateValidatorTest {
             "2020, 11, 31",
             "2200000000, 1, 1"
     })
-    void 달력에_없는_옳지않은_날짜는_예외처리(String year, String month, String day) {
+    public void 달력에_없는_옳지않은_날짜는_예외처리(final String year, final String month, final String day) {
         // When & Then
         assertThatThrownBy(() -> DateValidator.validateExistInCalendar(year, month, day, expectedMessage))
                 .isInstanceOf(IllegalArgumentException.class)

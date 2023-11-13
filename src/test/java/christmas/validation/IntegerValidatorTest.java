@@ -11,7 +11,7 @@ public class IntegerValidatorTest {
     private final String expectedMessage = "잘못된 값입니다.";
 
     @ParameterizedTest(name = "{0}는 정수가 아니라 예외 처리해야 한다.")
-    @ValueSource(strings = {"k","2200000000"})
+    @ValueSource(strings = {"k", "2200000000"})
     public void 정수가_아니면_예외_처리(final String input) {
         assertThatThrownBy(() -> IntegerValidator.validateInteger(input, expectedMessage))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -19,7 +19,7 @@ public class IntegerValidatorTest {
     }
 
     @ParameterizedTest(name = "{0}는 정수이다.")
-    @ValueSource(strings = {"20","-20","0","2100000000"})
+    @ValueSource(strings = {"20", "-20", "0", "2100000000"})
     public void 정수가_맞으면_검증_통과(final String input) {
         IntegerValidator.validateInteger(input, expectedMessage);
     }
@@ -36,7 +36,7 @@ public class IntegerValidatorTest {
     }
 
     @ParameterizedTest(name = "{0}는 음수라 예외 처리해야 한다.")
-    @ValueSource(ints = {-20,-2100000000})
+    @ValueSource(ints = {-20, -2100000000})
     public void 음수면_예외_발생(final int value) {
         assertThatThrownBy(() -> IntegerValidator.validateNotNegative(value, expectedMessage))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -44,7 +44,7 @@ public class IntegerValidatorTest {
     }
 
     @ParameterizedTest(name = "{0}는 음수가 아니다.")
-    @ValueSource(ints = {20,0,2100000000})
+    @ValueSource(ints = {20, 0, 2100000000})
     public void 음수가_아니면_검증_통과(final int value) {
         IntegerValidator.validateNotNegative(value, expectedMessage);
     }

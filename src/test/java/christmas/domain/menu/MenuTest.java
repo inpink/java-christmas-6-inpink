@@ -28,6 +28,7 @@ public class MenuTest {
             "없는음식",
             "안팔아요",
             "배고파요",
+            "훈이머리",
             "RED_WINE",
             "''"
     })

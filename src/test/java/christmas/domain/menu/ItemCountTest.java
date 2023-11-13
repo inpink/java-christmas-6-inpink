@@ -19,7 +19,7 @@ public class ItemCountTest {
     }
 
     @ParameterizedTest(name = "값 {0}은 ItemCount 객체에 담을 수 없다.")
-    @ValueSource(strings = {"-1", "0", "2200000000"})
+    @ValueSource(strings = {"-1", "0", "2200000000", " "})
     public void 한개_이상의_정수_값만_담을_수_있음(final String count) {
         // When && Then
         assertThatThrownBy(() -> ItemCount.create(count))

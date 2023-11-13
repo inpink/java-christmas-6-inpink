@@ -13,9 +13,9 @@ public class StringUtilTest {
             "'123456789', '123,456,789'",
             "'0', '0'"
     })
-    void 천단위_구분자_문자열_생성(int number, String expected) {
+    void 천단위_구분자_문자열_생성(final int number, final String expected) {
         // When
-        String result = StringUtil.formatByThousandSeparator(number);
+        final String result = StringUtil.formatByThousandSeparator(number);
 
         // Then
         assertThat(result).isEqualTo(expected);
@@ -28,9 +28,9 @@ public class StringUtilTest {
             "'123 456 789', '123456789'",
             "'', ''"
     })
-    void 문자열의_모든_공백을_제거(String input, String expected) {
+    void 문자열의_모든_공백을_제거(final String input, final String expected) {
         // When
-        String result = StringUtil.removeAllSpaces(input);
+        final String result = StringUtil.removeAllSpaces(input);
 
         // Then
         assertThat(StringUtil.removeAllSpaces(result)).isEqualTo(expected);
