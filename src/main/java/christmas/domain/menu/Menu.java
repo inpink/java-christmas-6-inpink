@@ -28,7 +28,7 @@ public enum Menu { //이미 정해져있으니까 enum. 만약 매번 새롭게 
         return items;
     }
 
-    public static Menu findMenuType(final String itemName) {
+    public static Menu findMenu(final String itemName) {
         return Arrays.stream(Menu.values())
                 .filter(menu -> Arrays.stream(menu.items)
                         .anyMatch(item -> item.hasItem(itemName)))
