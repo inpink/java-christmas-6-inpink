@@ -39,4 +39,16 @@ public class MapValidatorTest {
         MapValidator.validateDuplicateKey(testMap, key, expectedMessage);
     }
 
+    @Test
+    void 맵이_비어있으면_예외_처리() {
+        final Map<String, Integer> emptyMap = new HashMap<>();
+        assertThatThrownBy(() -> MapValidator.validateNotEmpty(emptyMap, expectedMessage))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(expectedMessage);
+    }
+
+    @Test
+    void 맵이_비어있지_않으면_정상_통과() {
+        MapValidator.validateNotEmpty(testMap, expectedMessage);
+    }
 }
