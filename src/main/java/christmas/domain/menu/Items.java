@@ -34,5 +34,16 @@ public class Items {
         return new HashMap<>(items);
     }
 
+    public int calcItemCounts() {
+        return items.values().stream()
+                .mapToInt(ItemCount::getCount)
+                .sum();
+    }
 
+
+    private void validateSumOfCounts() {
+        if (calcItemCounts() > MAX_MENU_ITEM_COUNT.getValue()) {
+            ExceptionUtil.throwInvalidValueException(errorMessge);
+        }
+    }
 }
