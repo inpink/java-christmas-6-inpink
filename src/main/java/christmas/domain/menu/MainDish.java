@@ -1,5 +1,7 @@
 package christmas.domain.menu;
 
+import christmas.domain.money.ItemPrice;
+
 public enum MainDish implements Item {
 
     T_BONE_STEAK("티본스테이크", 55_000),
@@ -8,11 +10,11 @@ public enum MainDish implements Item {
     CHRISTMAS_PASTA("크리스마스파스타", 25_000);
 
     private final String name;
-    private final int price;
+    private final ItemPrice price;
 
     MainDish(final String name, final int price) {
         this.name = name;
-        this.price = price;
+        this.price = new ItemPrice(price);
     }
 
     @Override
@@ -21,7 +23,7 @@ public enum MainDish implements Item {
     }
 
     @Override
-    public int getPrice() {
+    public ItemPrice getPrice() {
         return price;
     }
 }
