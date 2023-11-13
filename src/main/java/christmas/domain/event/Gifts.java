@@ -12,6 +12,10 @@ public class Gifts {
         this.gifts = gifts;
     }
 
+    public static Gifts create(List<Item> gifts) {
+        return new Gifts(gifts);
+    }
+
     public static Gifts createEmpty() {
         return new Gifts(new ArrayList<>());
     }
@@ -20,5 +24,9 @@ public class Gifts {
         return gifts.stream()
                 .map(Item::getPrice)
                 .reduce(Money.createEmpty(), Money::add);
+    }
+
+    public int size() {
+        return gifts.size();
     }
 }
