@@ -29,6 +29,18 @@ public abstract class Money<T extends Money<T>> {
         return this.amount < amount;
     }
 
+    public boolean isBiggerOrSameThan(final Money<?> other) {
+        return this.amount >= other.amount;
+    }
+
+    public boolean isSmallerOrSameThan(final Money<?> other) {
+        return this.amount <= other.amount;
+    }
+
+    public boolean isInRange(final Money<?> minPrice, final Money<?> maxPrice) {
+        return isBiggerOrSameThan(minPrice) && isSmallerOrSameThan(maxPrice);
+    }
+
     public T add(final Money<?> other) {
         return create(this.amount + other.amount);
     }
@@ -54,4 +66,5 @@ public abstract class Money<T extends Money<T>> {
     protected void validate(int amount) {
         IntegerValidator.validateNotNegative(amount, INVALID_NEGATIVE_VALUE.getMessage());
     }
+
 }
