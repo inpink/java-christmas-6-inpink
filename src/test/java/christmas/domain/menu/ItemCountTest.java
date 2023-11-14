@@ -23,7 +23,6 @@ public class ItemCountTest {
     public void 한개_이상의_정수_값만_담을_수_있음(final String count) {
         // When && Then
         assertThatThrownBy(() -> ItemCount.create(count))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("타당하지 않은 상품 개수입니다.");
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

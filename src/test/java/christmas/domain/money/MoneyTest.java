@@ -26,8 +26,7 @@ class MoneyTest {
     public void Money는_음수값을_가질_수_없음(final int amount) {
         // When && Then
         assertThatThrownBy(() -> Money.create(amount))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 음수값은 사용할 수 없습니다.");
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest(name = "두 Money의 값을 비교하여 {0}이 {1}보다 크거나 같은지는 {2}여야 한다.")

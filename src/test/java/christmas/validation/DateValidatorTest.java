@@ -31,7 +31,6 @@ class DateValidatorTest {
     public void 달력에_없는_옳지않은_날짜는_예외처리(final String year, final String month, final String day) {
         // When & Then
         assertThatThrownBy(() -> DateValidator.validateExistInCalendar(year, month, day))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] ");
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -5,15 +5,15 @@ import java.util.Map;
 
 public final class MapValidator {
 
-    public static void validateDuplicateKey(final Map map, final Object item, final String errorMessage ) {
+    public static void validateDuplicateKey(final Map map, final Object item) {
         if (map.containsKey(item)) {
-            ExceptionUtil.throwInvalidValueException(errorMessage);
+            ExceptionUtil.throwInvalidValueException();
         }
     }
 
-    public static void validateNotEmpty(final Map map, final String errorMessage) {
+    public static void validateNotEmpty(final Map map) {
         if (map.size()==0) {
-            ExceptionUtil.throwInvalidValueException(errorMessage);
+            ExceptionUtil.throwInvalidValueException();
         }
     }
 }

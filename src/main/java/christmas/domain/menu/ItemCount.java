@@ -15,16 +15,13 @@ public class ItemCount {
     }
 
     public static ItemCount create(final String input) {
-        IntegerValidator.validateInteger(input, INVALID_ITEM_COUNT.getMessage());
-
+        IntegerValidator.validateInteger(input);
         return new ItemCount(Integer.parseInt(input));
     }
 
     private void validate(final int count) {
-        IntegerValidator.validateNotNegative(count, INVALID_ITEM_COUNT.getMessage());
-        IntegerValidator.validateNotSmaller(count,
-                MIN_ORDER_ITEM_COUNT.getValue(),
-                INVALID_ITEM_COUNT.getMessage());
+        IntegerValidator.validateNotNegative(count);
+        IntegerValidator.validateNotSmaller(count, MIN_ORDER_ITEM_COUNT.getValue());
     }
 
     public int getCount() {

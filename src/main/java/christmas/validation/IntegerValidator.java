@@ -7,54 +7,54 @@ import java.util.Arrays;
 
 public final class IntegerValidator {
 
-    public static void validateInteger(final String string, final String errorMessage) {
+    public static void validateInteger(final String string) {
         if (!IntegerUtil.isInteger(string)) {
-            ExceptionUtil.throwInvalidValueException(errorMessage);
+            ExceptionUtil.throwInvalidValueException();
         }
     }
 
-    public static void validateInteger(final String errorMessage, final String... strings) {
+    public static void validateInteger(final String... strings) {
         Arrays.stream(strings)
-                .forEach(string -> validateInteger(string, errorMessage));
+                .forEach(string -> validateInteger(string));
     }
 
-    public static void validateNotNegative(final int value, final String errorMessage) {
+    public static void validateNotNegative(final int value) {
         if (value < 0) {
-            ExceptionUtil.throwInvalidValueException(errorMessage);
+            ExceptionUtil.throwInvalidValueException();
         }
     }
 
-    public static void validateInRange(final int value, final int min, final int max, final String errorMessage) {
-        validateNotSmaller(value, min, errorMessage);
-        validateNotBigger(value, max, errorMessage);
+    public static void validateInRange(final int value, final int min, final int max) {
+        validateNotSmaller(value, min);
+        validateNotBigger(value, max);
     }
 
-    public static void validateNotSmaller(final int value, final int min, final String errorMessage) {
+    public static void validateNotSmaller(final int value, final int min) {
         if (value < min) {
-            ExceptionUtil.throwInvalidValueException(errorMessage);
+            ExceptionUtil.throwInvalidValueException();
         }
     }
 
-    public static void validateNotBigger(final int value, final int max, final String errorMessage) {
+    public static void validateNotBigger(final int value, final int max) {
         if (value > max) {
-            ExceptionUtil.throwInvalidValueException(errorMessage);
+            ExceptionUtil.throwInvalidValueException();
         }
     }
 
-    public static void validatePlusRange(final int value1, final int value2, final String errorMessage) {
+    public static void validatePlusRange(final int value1, final int value2) {
         final BigInteger a = BigInteger.valueOf(value1);
         final BigInteger b = BigInteger.valueOf(value2);
         final BigInteger result = a.add(b);
 
         if (result.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0 ||
                 result.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) < 0) {
-            ExceptionUtil.throwInvalidValueException(errorMessage);
+            ExceptionUtil.throwInvalidValueException();
         }
     }
 
-    public static void validateSame(final int value1, final int value2, final String errorMessage) {
+    public static void validateSame(final int value1, final int value2) {
         if (value1 != value2) {
-            ExceptionUtil.throwInvalidValueException(errorMessage);
+            ExceptionUtil.throwInvalidValueException();
         }
     }
 }

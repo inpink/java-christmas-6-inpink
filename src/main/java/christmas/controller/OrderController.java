@@ -7,6 +7,7 @@ import christmas.domain.dto.DtoMapper;
 import christmas.domain.dto.MemberBadgeDto;
 import christmas.domain.dto.OrderBenefitsDto;
 import christmas.domain.dto.OrderItemsDto;
+import christmas.domain.entity.DateOfVisit;
 import christmas.domain.entity.Money;
 import christmas.domain.event.Badge;
 import christmas.domain.event.Benefits;
@@ -40,12 +41,15 @@ public class OrderController {
     public void order() {
         printStartMessages();
 
-        final LocalDate dateOfVisit = inputAndValidateDateOfVisit();
+        final LocalDate dateOfVisit = inputAndValidateDateOfVisit(); // TODO: "일"객체로 분리하기
         final Items items = inputAndCreateOrderItems();
         final Benefits benefits = calculateBenefits(dateOfVisit, items);
         final Money totalDiscount = benefits.calcTotalDiscount();
         final Badge badge = Badge.getBadgeByPrice(totalDiscount);
         final Order order = createOrder(dateOfVisit, items, benefits);
+        /*final Member member = MemberService.findById(id);
+        member.addOrder(order);
+        memeber.updateBadge(badge);*/
 
         outputOrder(order, items, benefits, badge);
     }
@@ -58,16 +62,7 @@ public class OrderController {
 
     private LocalDate inputAndValidateDateOfVisit() {
         final String inputDateOfVisit = inputView.inputExpectedDateOfVisit();
-        DateValidator.validateExistInCalendar(
-                THIS_YEAR.toString(),
-                THIS_MONTH.toString(),
-                inputDateOfVisit
-        );
-        return LocalDate.of(
-                THIS_YEAR.getValue(),
-                THIS_MONTH.getValue(),
-                Integer.parseInt(inputDateOfVisit)
-        );
+        return DateOfVisit.toLocalDate(inputDateOfVisit);
     }
 
     private Items inputAndCreateOrderItems() {

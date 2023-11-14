@@ -38,7 +38,6 @@ public class ItemsTest {
     public void 정상_아이템맵_객체_생성(final String input) {
         // When && Then
         assertThatThrownBy(() -> Items.create(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR]");
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

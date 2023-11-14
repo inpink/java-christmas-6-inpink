@@ -21,7 +21,7 @@ public class Items {
     private final Map<Item, ItemCount> items;
 
     private Items(final Map<Item, ItemCount> items) {
-        MapValidator.validateNotEmpty(items, errorMessge);
+        MapValidator.validateNotEmpty(items);
         this.items = items;
         validateSumOfCounts();
     }
@@ -61,12 +61,12 @@ public class Items {
 
         for (final String itemNameAndCount : toList(input)) {
             final String[] parts = itemNameAndCount.split("-"); //TODO: 상수화
-            IntegerValidator.validateSame(parts.length, 2, errorMessge);
+            IntegerValidator.validateSame(parts.length, 2);
 
             final Item item = Menu.findItem(parts[0]);
             final ItemCount itemCount = ItemCount.create(parts[1]);
 
-            MapValidator.validateDuplicateKey(items, item, errorMessge);
+            MapValidator.validateDuplicateKey(items, item);
             items.put(item, itemCount);
         }
 

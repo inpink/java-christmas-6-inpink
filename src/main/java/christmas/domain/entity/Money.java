@@ -82,7 +82,7 @@ public final class Money {
     }
 
     private void validate(final int amount) {
-        IntegerValidator.validateNotNegative(amount, INVALID_NEGATIVE_VALUE.getMessage());
+        IntegerValidator.validateNotNegative(amount);
     }
 
     @Override
