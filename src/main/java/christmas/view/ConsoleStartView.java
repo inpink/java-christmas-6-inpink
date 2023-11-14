@@ -30,7 +30,7 @@ public class ConsoleStartView implements StartView {
         for (Menu menu : Menu.values()) {
             System.out.println("<" + menu.getDescription() + ">");
             for (Item item : menu.getItems()) {
-                System.out.println(item.getName() + "(" + item.getPrice() + ")");
+                System.out.println(item.getName() + "(" + item.getPrice().getAmount() + ")");
             }
             OutputUtil.printEmptyLine();
         }
