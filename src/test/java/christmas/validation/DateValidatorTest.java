@@ -7,8 +7,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class DateValidatorTest {
 
-    private final String expectedMessage = "잘못된 값입니다.";
-
     @ParameterizedTest(name = "{0}년 {1}월 {2}일은 옳은 날짜다.")
     @CsvSource({
             "2023, 12, 25",
@@ -18,7 +16,7 @@ class DateValidatorTest {
     })
     public void 달력에_있는_옳은_날짜_검증_통과(final String year, final String month, final String day) {
         // When
-        DateValidator.validateExistInCalendar(year, month, day, expectedMessage);
+        DateValidator.validateExistInCalendar(year, month, day);
     }
 
     @ParameterizedTest(name = "{0}년 {1}월 {2}일은 옳은 날짜가 아니다.")
@@ -32,8 +30,8 @@ class DateValidatorTest {
     })
     public void 달력에_없는_옳지않은_날짜는_예외처리(final String year, final String month, final String day) {
         // When & Then
-        assertThatThrownBy(() -> DateValidator.validateExistInCalendar(year, month, day, expectedMessage))
+        assertThatThrownBy(() -> DateValidator.validateExistInCalendar(year, month, day))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(expectedMessage);
+                .hasMessageContaining("[ERROR] ");
     }
 }

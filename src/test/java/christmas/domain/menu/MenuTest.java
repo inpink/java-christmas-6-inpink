@@ -16,8 +16,11 @@ public class MenuTest {
             "제로콜라, DRINKS"
     })
     public void 아이템이_어떤메뉴에_해당되는지_찾기(final String itemName, final Menu expectedMenuName) {
+        // Given
+        final Item item = Menu.findItem(itemName);
+
         // When
-        final Menu result = Menu.findMenu(itemName);
+        final Menu result = Menu.findMenu(item);
 
         // Then
         assertThat(result).isEqualTo(expectedMenuName);
@@ -33,8 +36,8 @@ public class MenuTest {
             "''"
     })
     public void 메뉴판에_없는아이템을_찾으면_예외_발생(final String itemName) {
-        // When && Then
-        assertThatThrownBy(() -> Menu.findMenu(itemName))
+        // When & Then
+        assertThatThrownBy(() -> Menu.findItem(itemName))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("존재하지 않는 메뉴입니다.");
     }

@@ -1,5 +1,7 @@
 package christmas.domain.event;
 
+import christmas.domain.menu.Item;
+import java.util.List;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -28,7 +30,7 @@ class GiftEventTest {
 
         // When
         final Benefit benefit = GiftEvent.calculateBenefit(testDate, orderPrice);
-        final Gifts gifts = benefit.getGifts();
+        final List<Item> gifts = benefit.getGiftsByList();
         final Money money = benefit.getDiscountPrice();
 
         // Then
