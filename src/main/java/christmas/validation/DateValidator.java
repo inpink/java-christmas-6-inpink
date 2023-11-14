@@ -17,7 +17,7 @@ public final class DateValidator {
             LocalDate.of(Integer.parseInt(year),
                     Integer.parseInt(month),
                     Integer.parseInt(date));
-        } catch (DateTimeException e) {
+        } catch (Exception e) {
             ExceptionUtil.throwInvalidValueException(INVALID_DATE.getMessage());
         }
     }
