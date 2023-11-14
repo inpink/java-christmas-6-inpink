@@ -35,14 +35,14 @@ public class ConsoleOutputView implements OutputView {
     }
 
     @Override
-    public void outputGiftMenu() {
+    public void outputGifts() {
         System.out.println(makeTitleForm(GIFT_MENU_TITLE.getMessage()));
 
         OutputUtil.printEmptyLine();
     }
 
     @Override
-    public void outputBenefits() {
+    public void outputDiscounts() {
         System.out.println(makeTitleForm(BENEFITS_TITLE.getMessage()));
 
         OutputUtil.printEmptyLine();

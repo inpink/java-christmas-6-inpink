@@ -8,9 +8,9 @@ public interface OutputView {
 
     void outputTotalPriceBeforeDiscount();
 
-    void outputGiftMenu();
+    void outputGifts();
 
-    void outputBenefits();
+    void outputDiscounts();
 
     void outputTotalBenefitsPrice();
 

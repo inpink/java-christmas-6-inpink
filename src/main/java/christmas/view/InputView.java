@@ -4,5 +4,5 @@ public interface InputView {
 
     String inputExpectedDateOfVisit();
 
-    String inputOrderItemsWithCount();
+    String inputOrderItemsWithCounts();
 }
