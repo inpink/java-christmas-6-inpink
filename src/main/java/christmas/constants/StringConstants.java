@@ -1,9 +1,7 @@
 package christmas.constants;
 
 public enum StringConstants {
-    SEPERATE_STANDARD(","),
-    KOREAN_WON("원"),
-    ITEM_COUNT("개");
+    SEPERATE_STANDARD(",");
 
     private final String value;
 

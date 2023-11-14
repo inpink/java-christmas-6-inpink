@@ -1,9 +1,9 @@
 package christmas.view;
 
-import static christmas.constants.StringConstants.ITEM_COUNT;
-import static christmas.constants.StringConstants.KOREAN_WON;
 import static christmas.messages.OutputMessages.BENEFITS_TITLE;
 import static christmas.messages.OutputMessages.GIFT_MENU_TITLE;
+import static christmas.messages.OutputMessages.ITEM_COUNT;
+import static christmas.messages.OutputMessages.KOREAN_WON;
 import static christmas.messages.OutputMessages.ORDER_MENU_TITLE;
 import static christmas.messages.OutputMessages.PREVIEW_TITLE;
 import static christmas.messages.OutputMessages.THIS_MONTH_EVENT_BADGE_TITLE;
@@ -58,7 +58,7 @@ public class ConsoleOutputView implements OutputView {
         outputTitle(ORDER_MENU_TITLE.getMessage());
 
         for (Map.Entry<String, Integer> entry : itemsAndCounts.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue() + ITEM_COUNT.getValue());
+            System.out.println(entry.getKey() + " " + entry.getValue() + ITEM_COUNT.getMessage());
         }
         OutputUtil.printEmptyLine();
     }
@@ -66,7 +66,7 @@ public class ConsoleOutputView implements OutputView {
     private void outputTotalPriceBeforeDiscount(final int priceBeforeDiscount) {
         outputTitle(TOTAL_PRICE_BEFORE_DISCOUNT_TITLE.getMessage());
         System.out.println(StringUtil.formatByThousandSeparator(priceBeforeDiscount)
-                + KOREAN_WON.getValue());
+                + KOREAN_WON.getMessage());
         OutputUtil.printEmptyLine();
     }
 
@@ -81,7 +81,7 @@ public class ConsoleOutputView implements OutputView {
         outputTitle(GIFT_MENU_TITLE.getMessage());
 
         for (Map.Entry<String, Integer> entry : gifts.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue() + ITEM_COUNT.getValue());
+            System.out.println(entry.getKey() + " " + entry.getValue() + ITEM_COUNT.getMessage());
         }
         OutputUtil.printEmptyLine();
     }
@@ -92,7 +92,7 @@ public class ConsoleOutputView implements OutputView {
         for (Map.Entry<String, Integer> discountEntry : discounts.entrySet()) {
             System.out.println(discountEntry.getKey() + ": -"
                     + StringUtil.formatByThousandSeparator(discountEntry.getValue())
-                    + KOREAN_WON.getValue());
+                    + KOREAN_WON.getMessage());
         }
         OutputUtil.printEmptyLine();
     }
@@ -101,7 +101,7 @@ public class ConsoleOutputView implements OutputView {
         outputTitle(TOTAL_BENEFITS_PRICE_TITLE.getMessage());
         System.out.println("-"
                 + StringUtil.formatByThousandSeparator(sumDiscounts)
-                + KOREAN_WON.getValue());
+                + KOREAN_WON.getMessage());
         OutputUtil.printEmptyLine();
     }
 
@@ -113,7 +113,7 @@ public class ConsoleOutputView implements OutputView {
         final int finalPrice = totalPriceBeforeDiscount
                 - sumDiscounts
                 + trickeryDiscount;
-        System.out.println(StringUtil.formatByThousandSeparator(finalPrice) + KOREAN_WON.getValue());
+        System.out.println(StringUtil.formatByThousandSeparator(finalPrice) + KOREAN_WON.getMessage());
 
         OutputUtil.printEmptyLine();
     }
