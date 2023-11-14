@@ -14,7 +14,7 @@ import java.util.List;
 
 public enum GiftEvent {
 
-    GIFT_EVENT_CONDITIONS(12_000, 1, 25);
+    GIFT_EVENT_CONDITIONS(120_000, 1, 31);
 
     private final Money minimumMoney;
     private final LocalDate startDate;
