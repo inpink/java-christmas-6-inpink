@@ -33,4 +33,8 @@ public class Gifts {
     public boolean isNull() {
         return size()==0;
     }
+
+    public List<Item> getGifts() {
+        return gifts;
+    }
 }

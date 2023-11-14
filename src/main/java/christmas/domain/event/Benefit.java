@@ -1,6 +1,8 @@
 package christmas.domain.event;
 
 import christmas.domain.entity.Money;
+import christmas.domain.menu.Item;
+import java.util.List;
 
 public class Benefit {
 
@@ -24,12 +26,16 @@ public class Benefit {
         return new Benefit(gifts.calcMoney(), gifts);
     }
 
-    public Gifts getGifts() {
-        return gifts;
+    public List<Item> getGiftsByList() {
+        return gifts.getGifts();
     }
 
     public Money getDiscountPrice() {
         return discountPrice;
+    }
+
+    public Money getGiftsPrice() {
+        return gifts.calcMoney();
     }
 
     public boolean isNull() {

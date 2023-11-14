@@ -1,18 +1,23 @@
 package christmas.domain.event;
 
 import christmas.domain.entity.Money;
+import christmas.domain.menu.Item;
 import java.util.EnumMap;
 import java.util.EnumSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Benefits {
 
-    private final EnumMap<Event,Benefit> benefits;
+    private final EnumMap<Event, Benefit> benefits;
 
-    private Benefits(final EnumMap<Event,Benefit> benefits) {
+    private Benefits(final EnumMap<Event, Benefit> benefits) {
         this.benefits = benefits;
     }
 
-    public static Benefits create(final EnumMap<Event,Benefit> benefits) {
+    public static Benefits create(final EnumMap<Event, Benefit> benefits) {
         return new Benefits(benefits);
     }
 
@@ -25,8 +30,16 @@ public class Benefits {
     }
 
     public Money calcTotalDiscount() {
-        return benefits.values().stream()
+        return benefits.values()
+                .stream()
                 .map(Benefit::getDiscountPrice)
+                .reduce(Money.create(0), Money::add);
+    }
+
+    public Money calcTrickeryDiscount() {
+        return benefits.values()
+                .stream()
+                .map(Benefit::getGiftsPrice)
                 .reduce(Money.create(0), Money::add);
     }
 

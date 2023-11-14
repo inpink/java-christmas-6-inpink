@@ -97,10 +97,24 @@ public class ConsoleOutputView implements OutputView {
         OutputUtil.printEmptyLine();
     }
 
+    private void outputSumOfDiscounts(final int sumDiscounts) {
+        outputTitle(TOTAL_BENEFITS_PRICE_TITLE.getMessage());
+        System.out.println("-"
+                + StringUtil.formatByThousandSeparator(sumDiscounts)
+                + KOREAN_WON.getValue());
+        OutputUtil.printEmptyLine();
+    }
 
-    private void outputTotalPriceAfterDiscount(final int totalPriceAfterDiscount) {
+    private void outputTotalPriceAfterDiscount(final int totalPriceBeforeDiscount,
+                                               final int sumDiscounts,
+                                               final int trickeryDiscount) {
         outputTitle(TOTAL_PRICE_AFTER_DISCOUNT_TITLE.getMessage());
-        System.out.println(StringUtil.formatByThousandSeparator(totalPriceAfterDiscount));
+
+        final int finalPrice = totalPriceBeforeDiscount
+                - sumDiscounts
+                + trickeryDiscount;
+        System.out.println(StringUtil.formatByThousandSeparator(finalPrice) + KOREAN_WON.getValue());
+
         OutputUtil.printEmptyLine();
     }
 
