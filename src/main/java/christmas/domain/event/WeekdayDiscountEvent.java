@@ -12,6 +12,12 @@ import christmas.domain.menu.Menu;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+//YES or NO 판단하는 용도만 (계산기라기보단 판단)
+//판단용도(상수라기보단 비지니스 로직에 가까움)
+//enum의 장점 : 평일 할인을 관리하는 것을 이 클래스 내부에서 짧은 코드로 관리할 수 있음. 가독성 향상, 응집도 향상.
+//평일 할인은 다른 비지니스 로직에 의존하는 것이 아님. 그렇기에 더더욱 enum화에서 장점을 가짐
+//중앙집중화된 로직,  일관된 인터페이스(다양한 할인 조건을 쉽게 추가하거나 수정할 수 있다.), 타입 안전성이 보장
+//평일 할인이면서 주말 할인인 경우는 논리적으로 없고, 중복 로직이 많아 하나로 합침
 public enum WeekdayDiscountEvent {
     DISCOUNT_CONDITIONS(WEEKDAY, DESSERTS, 1, 31);
 

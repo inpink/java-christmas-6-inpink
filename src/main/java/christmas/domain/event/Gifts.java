@@ -29,4 +29,8 @@ public class Gifts {
     public int size() {
         return gifts.size();
     }
+
+    public boolean isNull() {
+        return size()==0;
+    }
 }

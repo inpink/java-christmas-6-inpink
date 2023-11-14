@@ -43,6 +43,10 @@ public final class Money {
         return this.amount <= other.amount;
     }
 
+    public boolean isSmallerOrSameThan(final int amount) {
+        return this.amount <= amount;
+    }
+
     public boolean isInRange(final Money minPrice, final Money maxPrice) {
         return isBiggerOrSameThan(minPrice) && isSmallerOrSameThan(maxPrice);
     }
@@ -79,5 +83,19 @@ public final class Money {
 
     private void validate(final int amount) {
         IntegerValidator.validateNotNegative(amount, INVALID_NEGATIVE_VALUE.getMessage());
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final Money other = (Money) o;
+        return this.amount == other.amount;
     }
 }

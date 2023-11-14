@@ -10,7 +10,7 @@ import christmas.domain.entity.Money;
 import java.time.LocalDate;
 
 public enum ChristmasDayDiscountEvent { //정해진 조건을 상수로 관리한다는 느낌을 더욱 주고 싱글톤의 장점도
-    DISCOUNT_CONDITIONS(1, 25);
+    CHRISTMAS_DAY_DISCOUNT_CONDITIONS(1, 25);
 
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -24,12 +24,12 @@ public enum ChristmasDayDiscountEvent { //정해진 조건을 상수로 관리�
         if (!isMeetingConditions(date)) {
             return Benefit.createEmpty();
         }
-        return new Benefit(calcDiscountPrice(date));
+        return Benefit.create(calcDiscountPrice(date));
     }
 
     private static boolean isMeetingConditions(final LocalDate date) {
-        return !(date.isBefore(DISCOUNT_CONDITIONS.startDate)
-                || date.isAfter(DISCOUNT_CONDITIONS.endDate));
+        return !(date.isBefore(CHRISTMAS_DAY_DISCOUNT_CONDITIONS.startDate)
+                || date.isAfter(CHRISTMAS_DAY_DISCOUNT_CONDITIONS.endDate));
     }
 
     private static Money calcDiscountPrice(final LocalDate date) {
@@ -38,7 +38,7 @@ public enum ChristmasDayDiscountEvent { //정해진 조건을 상수로 관리�
     }
 
     private static Money calculateDailySurcharge(final LocalDate date) {
-        final int daysSinceStart = (int) DAYS.between(DISCOUNT_CONDITIONS.startDate, date);
+        final int daysSinceStart = (int) DAYS.between(CHRISTMAS_DAY_DISCOUNT_CONDITIONS.startDate, date);
         final Money oneDaySurcharge = DAILY_SURCHARGE.amount;
         return oneDaySurcharge.multiply(daysSinceStart);
     }

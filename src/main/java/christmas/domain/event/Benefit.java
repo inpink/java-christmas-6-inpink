@@ -33,9 +33,6 @@ public class Benefit {
     }
 
     public boolean isNull() {
-       /* if (할인금액.isSmallerThat(0) && 증정상품.isNull()) {
-            return true;
-        }*/
-        return false;
+        return discountPrice.isSmallerOrSameThan(0) && gifts.isNull();
     }
 }
