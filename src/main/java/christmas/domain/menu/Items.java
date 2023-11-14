@@ -10,7 +10,6 @@ import christmas.util.StringListUtil;
 import christmas.util.StringUtil;
 import christmas.validation.IntegerValidator;
 import christmas.validation.MapValidator;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +18,9 @@ import java.util.Set;
 public class Items {
 
     private static final String errorMessge = INVALID_ITEMS_MAP.getMessage();
-    private final HashMap<Item, ItemCount> items;
+    private final Map<Item, ItemCount> items;
 
-    private Items(final HashMap<Item, ItemCount> items) {
+    private Items(final Map<Item, ItemCount> items) {
         MapValidator.validateNotEmpty(items, errorMessge);
         this.items = items;
         validateSumOfCounts();
@@ -29,7 +28,7 @@ public class Items {
 
     public static Items create(final String input) {
         final String deletedSpaces = StringUtil.removeAllSpaces(input);
-        final HashMap<Item, ItemCount> items = toMap(deletedSpaces);
+        final Map<Item, ItemCount> items = toMap(deletedSpaces);
 
         return new Items(items);
     }
@@ -44,8 +43,21 @@ public class Items {
                 .sum();
     }
 
-    private static HashMap<Item, ItemCount> toMap(final String input) {
-        final HashMap<Item, ItemCount> items = new HashMap<>();
+    public Money calcTotalPrice() {
+        return toEntrySet()
+                .stream()
+                .map(entry -> {
+                    Item item = entry.getKey();
+                    ItemCount itemCount = entry.getValue();
+
+                    Money itemPrice = item.getPrice();
+                    return itemPrice.multiply(itemCount.getCount());
+                })
+                .reduce(Money.create(0), Money::add);
+    }
+
+    private static Map<Item, ItemCount> toMap(final String input) {
+        final Map<Item, ItemCount> items = new HashMap<>();
 
         for (final String itemNameAndCount : toList(input)) {
             final String[] parts = itemNameAndCount.split("-"); //TODO: 상수화
@@ -77,24 +89,20 @@ public class Items {
         }
     }
 
-    public Money calcTotalPrice() {
-        return items.entrySet()
-                .stream()
-                .map(entry -> {
-                    Item item = entry.getKey();
-                    ItemCount itemCount = entry.getValue();
-
-                    Money itemPrice = item.getPrice();
-                    return itemPrice.multiply(itemCount.getCount());
-                })
-                .reduce(Money.create(0), Money::add);
-    }
-
-    public Set<Item> findKeys() {
-        return items.keySet();
-    }
-
     public Set<Map.Entry<Item, ItemCount>> toEntrySet() {
         return items.entrySet();
+    }
+
+    public Map<String, Integer> toMapWithNameKey() {
+        Map<String, Integer> stringIntegerMap = new HashMap<>();
+
+        for (Map.Entry<Item, ItemCount> entry : items.entrySet()) {
+            Item item = entry.getKey();
+            ItemCount itemCount = entry.getValue();
+
+            stringIntegerMap.put(item.getName(), itemCount.getCount());
+        }
+
+        return stringIntegerMap;
     }
 }
