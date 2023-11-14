@@ -55,7 +55,7 @@ public class ConsoleOutputView implements OutputView {
         outputTitle(ORDER_MENU_TITLE.getMessage());
 
         for (Map.Entry<String, Integer> entry : itemsAndCounts.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue() + "개");
+            System.out.println(entry.getKey() + " " + entry.getValue() + ITEM_COUNT.getValue());
         }
         OutputUtil.printEmptyLine();
     }
@@ -87,7 +87,8 @@ public class ConsoleOutputView implements OutputView {
 
         for (Map.Entry<String, Integer> discountEntry : discounts.entrySet()) {
             System.out.println(discountEntry.getKey() + ": -"
-                    + StringUtil.formatByThousandSeparator(discountEntry.getValue()) + "원");
+                    + StringUtil.formatByThousandSeparator(discountEntry.getValue())
+                    + KOREAN_WON.getValue());
         }
         OutputUtil.printEmptyLine();
     }
