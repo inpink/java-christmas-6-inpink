@@ -27,7 +27,6 @@ public class OrderController {
     private final OutputView outputView;
     private final OrderService orderService;
 
-
     public OrderController(final StartView startView,
                            final InputView inputView,
                            final OutputView outputView,
@@ -41,43 +40,14 @@ public class OrderController {
     public void order() {
         printStartMessages();
 
-        final String inputDateOfVisit = inputView.inputExpectedDateOfVisit();
-        DateValidator.validateExistInCalendar(
-                THIS_YEAR.toString(),
-                THIS_MONTH.toString(),
-                inputDateOfVisit);
+        final LocalDate dateOfVisit = inputAndValidateDateOfVisit();
+        final Items items = inputAndCreateOrderItems();
+        final Benefits benefits = calculateBenefits(dateOfVisit, items);
+        final Money totalDiscount = benefits.calcTotalDiscount();
+        final Badge badge = Badge.getBadgeByPrice(totalDiscount);
+        final Order order = createOrder(dateOfVisit, items, benefits);
 
-        final LocalDate dateOfVisit = LocalDate.of(
-                THIS_YEAR.getValue(),
-                THIS_MONTH.getValue(),
-                Integer.parseInt(inputDateOfVisit));
-
-        final String inputItemsWithCounts = inputView.inputOrderItemsWithCounts();
-        final Items items = Items.create(inputItemsWithCounts);
-        final Money totalPrice = items.calcTotalPrice();
-
-        final Benefits benefits = Event.findBenefits(dateOfVisit, items, totalPrice);
-        final Money trickeryDiscount = benefits.calcTrickeryDiscount();
-        final Order order = Order.create(dateOfVisit, items, benefits);
-        final Badge badge = Badge.getBadgeByPrice(benefits.calcTotalDiscount());
-
-        outputView.outputPreviewTitle();
-
-        final OrderItemsDto orderItemsDto = DtoMapper.toOrderItemsDto(
-                items.toMapWithNameKey(),
-                totalPrice.getAmount());
-        outputView.outputOrderItems(orderItemsDto);
-
-        final OrderBenefitsDto orderBenefitsDto = DtoMapper.toOrderBenefitsDto(
-                benefits.toGiftsMapWithNameKey(),
-                benefits.toDiscountsMapWithNameKey(),
-                totalPrice.getAmount(),
-                trickeryDiscount.getAmount());
-
-        outputView.outputBenefits(orderBenefitsDto);
-
-        final MemberBadgeDto memberBadgeDto = DtoMapper.toMemberBadgeDto(badge.getName());
-        outputView.outputThisMonthBadge(memberBadgeDto);
+        outputOrder(order, items, benefits, badge);
     }
 
     private void printStartMessages() {
@@ -86,4 +56,64 @@ public class OrderController {
         startView.printPrecaution();
     }
 
+    private LocalDate inputAndValidateDateOfVisit() {
+        final String inputDateOfVisit = inputView.inputExpectedDateOfVisit();
+        DateValidator.validateExistInCalendar(
+                THIS_YEAR.toString(),
+                THIS_MONTH.toString(),
+                inputDateOfVisit
+        );
+        return LocalDate.of(
+                THIS_YEAR.getValue(),
+                THIS_MONTH.getValue(),
+                Integer.parseInt(inputDateOfVisit)
+        );
+    }
+
+    private Items inputAndCreateOrderItems() {
+        final String inputItemsWithCounts = inputView.inputOrderItemsWithCounts();
+        return Items.create(inputItemsWithCounts);
+    }
+
+    private Benefits calculateBenefits(final LocalDate dateOfVisit, final Items items) {
+        final Money totalPrice = items.calcTotalPrice();
+        return Event.findBenefits(dateOfVisit, items, totalPrice);
+    }
+
+    private Order createOrder(final LocalDate dateOfVisit, final Items items, final Benefits benefits) {
+        return Order.create(dateOfVisit, items, benefits);
+    }
+
+    private void outputOrder(final Order order, final Items items, final Benefits benefits, final Badge badge) {
+        outputView.outputPreviewTitle();
+        outputOrderItems(items);
+        outputOrderBenefits(items, benefits);
+        outputMemberBadge(badge);
+    }
+
+    private void outputOrderItems(final Items items) {
+        final Money totalPrice = items.calcTotalPrice();
+        final OrderItemsDto orderItemsDto = DtoMapper.toOrderItemsDto(
+                items.toMapWithNameKey(),
+                totalPrice.getAmount()
+        );
+        outputView.outputOrderItems(orderItemsDto);
+    }
+
+    private void outputOrderBenefits(final Items items, final Benefits benefits) {
+        final Money trickeryDiscount = benefits.calcTrickeryDiscount();
+        final OrderBenefitsDto orderBenefitsDto = DtoMapper.toOrderBenefitsDto(
+                benefits.toGiftsMapWithNameKey(),
+                benefits.toDiscountsMapWithNameKey(),
+                items.calcTotalPrice().getAmount(),
+                trickeryDiscount.getAmount()
+        );
+        outputView.outputBenefits(orderBenefitsDto);
+    }
+
+    private void outputMemberBadge(final Badge badge) {
+        final MemberBadgeDto memberBadgeDto = DtoMapper.toMemberBadgeDto(badge.getName());
+        outputView.outputThisMonthBadge(memberBadgeDto);
+    }
 }
+
