@@ -1,7 +1,6 @@
 package christmas.domain.dto;
 
-import java.util.EnumMap;
-import java.util.HashMap;
+import java.util.Map;
 
 public class DtoMapper {
 
@@ -13,7 +12,7 @@ public class DtoMapper {
         return new MemberBadgeDto(badge);
     }
 
-    public static OrderItemsDto toOrderItemsDto(final HashMap<String, Integer> items,
+    public static OrderItemsDto toOrderItemsDto(final Map<String, Integer> items,
                                                 final int priceBeforeDiscount) {
         return new OrderItemsDto(items, priceBeforeDiscount);
     }
@@ -22,5 +21,7 @@ public class DtoMapper {
                                                       final HashMap<String, Integer> discounts,
                                                       final int priceBeforeDiscount) {
         return new OrderBenefitsDto(gifts, discounts, priceBeforeDiscount);
+    public static OrderBenefitsDto toOrderBenefitsDto(final Map<String, Integer> gifts,
+                                                      final Map<String, Integer> discounts,
     }
 }

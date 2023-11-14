@@ -1,10 +1,13 @@
 package christmas.view;
 
+import static christmas.constants.StringConstants.ITEM_COUNT;
+import static christmas.constants.StringConstants.KOREAN_WON;
 import static christmas.messages.OutputMessages.BENEFITS_TITLE;
 import static christmas.messages.OutputMessages.GIFT_MENU_TITLE;
 import static christmas.messages.OutputMessages.ORDER_MENU_TITLE;
 import static christmas.messages.OutputMessages.PREVIEW_TITLE;
 import static christmas.messages.OutputMessages.THIS_MONTH_EVENT_BADGE_TITLE;
+import static christmas.messages.OutputMessages.TOTAL_BENEFITS_PRICE_TITLE;
 import static christmas.messages.OutputMessages.TOTAL_PRICE_AFTER_DISCOUNT_TITLE;
 import static christmas.messages.OutputMessages.TOTAL_PRICE_BEFORE_DISCOUNT_TITLE;
 
@@ -13,7 +16,6 @@ import christmas.domain.dto.OrderBenefitsDto;
 import christmas.domain.dto.OrderItemsDto;
 import christmas.util.OutputUtil;
 import christmas.util.StringUtil;
-import java.util.HashMap;
 import java.util.Map;
 
 public class ConsoleOutputView implements OutputView {
@@ -32,15 +34,16 @@ public class ConsoleOutputView implements OutputView {
 
     @Override
     public void outputBenefits(OrderBenefitsDto orderBenefitsDto) {
-        final HashMap<String, Integer> gifts = orderBenefitsDto.getGifts();
-        final HashMap<String, Integer> discounts = orderBenefitsDto.getDiscounts();
+        final Map<String, Integer> gifts = orderBenefitsDto.getGifts();
+        final Map<String, Integer> discounts = orderBenefitsDto.getDiscounts();
         final int totalPriceBeforeDiscount = orderBenefitsDto.getPriceBeforeDiscount();
+        final int trickeryDiscount = orderBenefitsDto.getTrickeryDiscount();
         final int sumDiscounts = sumDiscounts(discounts);
-        final int totalPriceAfterDiscount = totalPriceBeforeDiscount - sumDiscounts;
 
         outputGifts(gifts);
         outputDiscounts(discounts);
-        outputTotalPriceAfterDiscount(totalPriceAfterDiscount);
+        outputSumOfDiscounts(sumDiscounts);
+        outputTotalPriceAfterDiscount(totalPriceBeforeDiscount, sumDiscounts, trickeryDiscount);
     }
 
     @Override
@@ -51,7 +54,7 @@ public class ConsoleOutputView implements OutputView {
         System.out.println(badge);
     }
 
-    private void outputItemsAndCounts(final HashMap<String, Integer> itemsAndCounts) {
+    private void outputItemsAndCounts(final Map<String, Integer> itemsAndCounts) {
         outputTitle(ORDER_MENU_TITLE.getMessage());
 
         for (Map.Entry<String, Integer> entry : itemsAndCounts.entrySet()) {
@@ -62,27 +65,28 @@ public class ConsoleOutputView implements OutputView {
 
     private void outputTotalPriceBeforeDiscount(final int priceBeforeDiscount) {
         outputTitle(TOTAL_PRICE_BEFORE_DISCOUNT_TITLE.getMessage());
-        System.out.println(StringUtil.formatByThousandSeparator(priceBeforeDiscount));
+        System.out.println(StringUtil.formatByThousandSeparator(priceBeforeDiscount)
+                + KOREAN_WON.getValue());
         OutputUtil.printEmptyLine();
     }
 
-    private int sumDiscounts(final HashMap<String, Integer> discounts) {
+    private int sumDiscounts(final Map<String, Integer> discounts) {
         return discounts.values()
                 .stream()
                 .mapToInt(Integer::intValue)
                 .sum();
     }
 
-    private void outputGifts(final HashMap<String, Integer> gifts) {
+    private void outputGifts(final Map<String, Integer> gifts) {
         outputTitle(GIFT_MENU_TITLE.getMessage());
 
         for (Map.Entry<String, Integer> entry : gifts.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue() + "개");
+            System.out.println(entry.getKey() + " " + entry.getValue() + ITEM_COUNT.getValue());
         }
         OutputUtil.printEmptyLine();
     }
 
-    private void outputDiscounts(final HashMap<String, Integer> discounts) {
+    private void outputDiscounts(final Map<String, Integer> discounts) {
         outputTitle(BENEFITS_TITLE.getMessage());
 
         for (Map.Entry<String, Integer> discountEntry : discounts.entrySet()) {
