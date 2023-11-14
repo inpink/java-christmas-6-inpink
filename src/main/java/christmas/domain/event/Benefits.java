@@ -49,4 +49,31 @@ public class Benefits {
         }
         return EnumSet.copyOf(benefits.keySet());
     }
+
+    public Set<Entry<Event, Benefit>> toEntrySet() {
+        return benefits.entrySet();
+    }
+
+    public Map<String, Integer> toGiftsMapWithNameKey() {
+        return benefits.values()
+                .stream()
+                .flatMap(benefit -> benefit.getGiftsByList().stream())
+                .collect(Collectors.groupingBy(Item::getName, Collectors.summingInt(item -> 1)));
+    }
+
+    public Map<String, Integer> toDiscountsMapWithNameKey() {
+        return toEntrySet()
+                .stream()
+                .collect(Collectors.toMap(
+                        entry -> {
+                            Event event = entry.getKey();
+                            return event.getDescription();
+                        },
+                        entry -> {
+                            Benefit benefit = entry.getValue();
+                            Money discountPrice = benefit.getDiscountPrice();
+                            return discountPrice.getAmount();
+                        }
+                ));
+    }
 }
