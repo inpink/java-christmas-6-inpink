@@ -54,10 +54,7 @@ public class OrderController {
         final Benefits benefits = calculateBenefits(dateOfVisit, items);
         final Money totalDiscount = benefits.calcTotalDiscount();
         final Badge badge = Badge.getBadgeByPrice(totalDiscount); //TODO: Service로 분리
-        final Order order = createOrder(dateOfVisit, items, benefits);
-        /*final Member member = MemberService.findById(id);
-        member.addOrder(order);
-        memeber.updateBadge(badge);*/
+        final Order order = createOrder(dateOfVisit, items, benefits, badge);
 
         outputOrder(items, benefits, badge);
     }
@@ -78,13 +75,17 @@ public class OrderController {
         return Items.create(inputItemsWithCounts);
     }
 
-    private Benefits calculateBenefits(final LocalDate dateOfVisit, final Items items) {
+    private Benefits calculateBenefits(final LocalDate dateOfVisit,
+                                       final Items items) {
         final Money totalPrice = items.calcTotalPrice();
         return Event.findBenefits(dateOfVisit, items, totalPrice);
     }
 
-    private Order createOrder(final LocalDate dateOfVisit, final Items items, final Benefits benefits) {
-        return Order.create(dateOfVisit, items, benefits);
+    private Order createOrder(final LocalDate dateOfVisit,
+                              final Items items,
+                              final Benefits benefits,
+                              final Badge badge) {
+        return Order.create(dateOfVisit, items, benefits, badge);
     }
 
     private void outputOrder(final Items items, final Benefits benefits, final Badge badge) {
