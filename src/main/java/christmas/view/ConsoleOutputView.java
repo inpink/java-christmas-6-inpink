@@ -4,6 +4,7 @@ import static christmas.messages.OutputMessages.BENEFITS_TITLE;
 import static christmas.messages.OutputMessages.GIFT_MENU_TITLE;
 import static christmas.messages.OutputMessages.ITEM_COUNT;
 import static christmas.messages.OutputMessages.KOREAN_WON;
+import static christmas.messages.OutputMessages.NOT_EXIST;
 import static christmas.messages.OutputMessages.ORDER_MENU_TITLE;
 import static christmas.messages.OutputMessages.PREVIEW_TITLE;
 import static christmas.messages.OutputMessages.THIS_MONTH_EVENT_BADGE_TITLE;
@@ -80,6 +81,9 @@ public class ConsoleOutputView implements OutputView {
     private void outputGifts(final Map<String, Integer> gifts) {
         outputTitle(GIFT_MENU_TITLE.getMessage());
 
+        if (gifts.isEmpty()) {
+            System.out.println(NOT_EXIST.getMessage());
+        }
         for (Map.Entry<String, Integer> entry : gifts.entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue() + ITEM_COUNT.getMessage());
         }
@@ -89,6 +93,9 @@ public class ConsoleOutputView implements OutputView {
     private void outputDiscounts(final Map<String, Integer> discounts) {
         outputTitle(BENEFITS_TITLE.getMessage());
 
+        if (discounts.isEmpty()) {
+            System.out.println(NOT_EXIST.getMessage());
+        }
         for (Map.Entry<String, Integer> discountEntry : discounts.entrySet()) {
             System.out.println(discountEntry.getKey() + ": -"
                     + StringUtil.formatByThousandSeparator(discountEntry.getValue())
