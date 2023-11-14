@@ -76,7 +76,7 @@ public class OrderController {
 
         outputView.outputBenefits(orderBenefitsDto);
 
-        final MemberBadgeDto memberBadgeDto = DtoMapper.toMemberBadgeDto(badge.name());
+        final MemberBadgeDto memberBadgeDto = DtoMapper.toMemberBadgeDto(badge.getName());
         outputView.outputThisMonthBadge(memberBadgeDto);
     }
 

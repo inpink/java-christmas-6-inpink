@@ -30,4 +30,8 @@ public enum Badge {
                 .orElseThrow(()
                         -> ExceptionUtil.returnInvalidValueException(INVALID_BADGE_PRICE.getMessage()));
     }
+
+    public String getName() {
+        return name;
+    }
 }
