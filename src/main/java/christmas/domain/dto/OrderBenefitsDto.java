@@ -7,23 +7,23 @@ import java.util.HashMap;
 
 public class OrderBenefitsDto {
 
-    private final HashMap<Item, Integer> gifts;
-    private final EnumMap<Event, Integer> discounts;
+    private final HashMap<String, Integer> gifts;
+    private final HashMap<String, Integer> discounts;
     private final int priceBeforeDiscount;
 
-    public OrderBenefitsDto(final HashMap<Item, Integer> gifts,
-                            final EnumMap<Event, Integer> discounts,
+    public OrderBenefitsDto(final HashMap<String, Integer> gifts,
+                            final HashMap<String, Integer> discounts,
                             final int priceBeforeDiscount) {
         this.gifts = gifts;
         this.discounts = discounts;
         this.priceBeforeDiscount = priceBeforeDiscount;
     }
 
-    public HashMap<Item, Integer> getGifts() {
+    public HashMap<String, Integer> getGifts() {
         return gifts;
     }
 
-    public EnumMap<Event, Integer> getDiscounts() {
+    public HashMap<String, Integer> getDiscounts() {
         return discounts;
     }
 
