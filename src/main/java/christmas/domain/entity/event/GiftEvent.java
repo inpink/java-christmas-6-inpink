@@ -1,13 +1,12 @@
-package christmas.domain.event;
+package christmas.domain.entity.event;
 
 
 import static christmas.constants.IntegerConstants.THIS_MONTH;
 import static christmas.constants.IntegerConstants.THIS_YEAR;
-import static christmas.domain.event.GiftEvent.GiftItem.CHAMPAGNE;
-import static christmas.domain.menu.Drink.Champagne;
+import static christmas.domain.entity.menu.Drink.Champagne;
 
 import christmas.domain.entity.Money;
-import christmas.domain.menu.Item;
+import christmas.domain.entity.menu.Item;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;

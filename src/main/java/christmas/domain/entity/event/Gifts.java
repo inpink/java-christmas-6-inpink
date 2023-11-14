@@ -1,7 +1,7 @@
-package christmas.domain.event;
+package christmas.domain.entity.event;
 
 import christmas.domain.entity.Money;
-import christmas.domain.menu.Item;
+import christmas.domain.entity.menu.Item;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package christmas.domain.menu;
+package christmas.domain.entity.menu;
 
 import static christmas.constants.IntegerConstants.MAX_MENU_ITEM_COUNT;
 import static christmas.constants.StringConstants.SEPERATE_STANDARD;

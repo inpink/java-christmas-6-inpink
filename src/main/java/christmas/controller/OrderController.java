@@ -9,11 +9,11 @@ import christmas.domain.dto.OrderBenefitsDto;
 import christmas.domain.dto.OrderItemsDto;
 import christmas.domain.entity.DateOfVisit;
 import christmas.domain.entity.Money;
-import christmas.domain.event.Badge;
-import christmas.domain.event.Benefits;
-import christmas.domain.event.Event;
-import christmas.domain.menu.Items;
-import christmas.domain.order.Order;
+import christmas.domain.entity.event.Badge;
+import christmas.domain.entity.event.Benefits;
+import christmas.domain.entity.event.Event;
+import christmas.domain.entity.menu.Items;
+import christmas.domain.entity.order.Order;
 import christmas.service.OrderService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -53,7 +53,7 @@ public class OrderController {
 
         final Benefits benefits = calculateBenefits(dateOfVisit, items);
         final Money totalDiscount = benefits.calcTotalDiscount();
-        final Badge badge = Badge.getBadgeByPrice(totalDiscount);
+        final Badge badge = Badge.getBadgeByPrice(totalDiscount); //TODO: Service로 분리
         final Order order = createOrder(dateOfVisit, items, benefits);
         /*final Member member = MemberService.findById(id);
         member.addOrder(order);

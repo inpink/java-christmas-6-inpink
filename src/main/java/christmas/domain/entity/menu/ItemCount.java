@@ -1,7 +1,6 @@
-package christmas.domain.menu;
+package christmas.domain.entity.menu;
 
 import static christmas.constants.IntegerConstants.MIN_ORDER_ITEM_COUNT;
-import static christmas.messages.ErrorMessages.INVALID_ITEM_COUNT;
 
 import christmas.validation.IntegerValidator;
 

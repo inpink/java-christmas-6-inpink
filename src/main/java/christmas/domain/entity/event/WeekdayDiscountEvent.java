@@ -1,17 +1,17 @@
-package christmas.domain.event;
+package christmas.domain.entity.event;
 
 import static christmas.constants.IntegerConstants.THIS_MONTH;
 import static christmas.constants.IntegerConstants.THIS_YEAR;
 import static christmas.domain.entity.WeekType.WEEKDAY;
-import static christmas.domain.event.WeekdayDiscountEvent.DiscountAmount.STANDARD;
-import static christmas.domain.menu.Menu.DESSERTS;
+import static christmas.domain.entity.event.WeekdayDiscountEvent.DiscountAmount.STANDARD;
+import static christmas.domain.entity.menu.Menu.DESSERTS;
 
 import christmas.domain.entity.Money;
 import christmas.domain.entity.WeekType;
-import christmas.domain.menu.Item;
-import christmas.domain.menu.ItemCount;
-import christmas.domain.menu.Items;
-import christmas.domain.menu.Menu;
+import christmas.domain.entity.menu.Item;
+import christmas.domain.entity.menu.ItemCount;
+import christmas.domain.entity.menu.Items;
+import christmas.domain.entity.menu.Menu;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 

@@ -1,17 +1,16 @@
-package christmas.domain.menu;
+package christmas.domain.entity.menu;
 
 import christmas.domain.entity.Money;
 
-public enum Appetizer implements Item {
-
-    MUSHROOM_SOUP("양송이수프",6_000),
-    TAPAS("타파스",5_500),
-    CAESAR_SALAD("시저샐러드",8_000);
+public enum Drink implements Item {
+    ZERO_COKE("제로콜라", 3_000),
+    RED_WINE("레드와인",60_000),
+    Champagne("샴페인", 25_000);
 
     private final String name;
     private final Money price;
 
-    Appetizer(final String name, final int price) {
+    Drink(final String name, final int price) {
         this.name = name;
         this.price = Money.create(price);
     }

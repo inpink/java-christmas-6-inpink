@@ -3,6 +3,7 @@ package christmas.domain.event;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import christmas.domain.entity.Money;
+import christmas.domain.entity.event.Badge;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

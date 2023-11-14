@@ -3,7 +3,9 @@ package christmas.domain.event;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.entity.Money;
-import christmas.domain.menu.Items;
+import christmas.domain.entity.event.Benefit;
+import christmas.domain.entity.event.WeekdayDiscountEvent;
+import christmas.domain.entity.menu.Items;
 import java.time.LocalDate;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

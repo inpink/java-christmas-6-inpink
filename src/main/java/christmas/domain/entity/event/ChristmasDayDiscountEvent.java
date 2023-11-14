@@ -1,9 +1,9 @@
-package christmas.domain.event;
+package christmas.domain.entity.event;
 
 import static christmas.constants.IntegerConstants.THIS_MONTH;
 import static christmas.constants.IntegerConstants.THIS_YEAR;
-import static christmas.domain.event.ChristmasDayDiscountEvent.DiscountAmount.DAILY_SURCHARGE;
-import static christmas.domain.event.ChristmasDayDiscountEvent.DiscountAmount.STANDARD;
+import static christmas.domain.entity.event.ChristmasDayDiscountEvent.DiscountAmount.DAILY_SURCHARGE;
+import static christmas.domain.entity.event.ChristmasDayDiscountEvent.DiscountAmount.STANDARD;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 import christmas.domain.entity.Money;

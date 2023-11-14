@@ -1,9 +1,9 @@
-package christmas.domain.event;
+package christmas.domain.entity.event;
 
-import static christmas.domain.event.Event.ApplyStatus.NO;
+import static christmas.domain.entity.event.Event.ApplyStatus.NO;
 
 import christmas.domain.entity.Money;
-import christmas.domain.menu.Items;
+import christmas.domain.entity.menu.Items;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.EnumMap;

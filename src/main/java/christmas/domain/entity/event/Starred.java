@@ -1,4 +1,4 @@
-package christmas.domain.event;
+package christmas.domain.entity.event;
 
 import static christmas.constants.IntegerConstants.THIS_MONTH;
 import static christmas.constants.IntegerConstants.THIS_YEAR;

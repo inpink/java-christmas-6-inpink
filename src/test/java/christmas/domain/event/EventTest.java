@@ -1,15 +1,17 @@
 package christmas.domain.event;
 
-import christmas.domain.menu.Items;
+import christmas.domain.entity.event.Benefits;
+import christmas.domain.entity.event.Event;
+import christmas.domain.entity.menu.Items;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static christmas.domain.event.Event.CHRISTMAS_DAY_DISCOUNT;
-import static christmas.domain.event.Event.GIFT_EVENT;
-import static christmas.domain.event.Event.SPECIAL_DISCOUNT;
-import static christmas.domain.event.Event.WEEKDAY_DISCOUNT;
-import static christmas.domain.event.Event.WEEKEND_DISCOUNT;
+import static christmas.domain.entity.event.Event.CHRISTMAS_DAY_DISCOUNT;
+import static christmas.domain.entity.event.Event.GIFT_EVENT;
+import static christmas.domain.entity.event.Event.SPECIAL_DISCOUNT;
+import static christmas.domain.entity.event.Event.WEEKDAY_DISCOUNT;
+import static christmas.domain.entity.event.Event.WEEKEND_DISCOUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;

@@ -5,8 +5,8 @@ import static christmas.messages.StartMessages.ANNOUNCE_MININUM_EVENT_APPLY_PRIC
 import static christmas.messages.StartMessages.ANNOUNCE_ONLY_BEVERAGE_NOT_ORDERABLE;
 import static christmas.messages.StartMessages.WELCOME;
 
-import christmas.domain.menu.Item;
-import christmas.domain.menu.Menu;
+import christmas.domain.entity.menu.Item;
+import christmas.domain.entity.menu.Menu;
 import christmas.util.OutputUtil;
 
 public class ConsoleStartView implements StartView {

@@ -1,6 +1,8 @@
 package christmas.domain.event;
 
 import christmas.domain.entity.Money;
+import christmas.domain.entity.event.Benefit;
+import christmas.domain.entity.event.ChristmasDayDiscountEvent;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

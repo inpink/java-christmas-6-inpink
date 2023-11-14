@@ -1,7 +1,7 @@
-package christmas.domain.order;
+package christmas.domain.entity.order;
 
-import christmas.domain.event.Benefits;
-import christmas.domain.menu.Items;
+import christmas.domain.entity.event.Benefits;
+import christmas.domain.entity.menu.Items;
 import java.time.LocalDate;
 
 public class Order {

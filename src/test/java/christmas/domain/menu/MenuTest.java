@@ -3,6 +3,8 @@ package christmas.domain.menu;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import christmas.domain.entity.menu.Item;
+import christmas.domain.entity.menu.Menu;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

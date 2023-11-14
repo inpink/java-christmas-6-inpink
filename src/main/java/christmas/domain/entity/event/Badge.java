@@ -1,4 +1,4 @@
-package christmas.domain.event;
+package christmas.domain.entity.event;
 
 import static christmas.messages.ErrorMessages.INVALID_BADGE_PRICE;
 

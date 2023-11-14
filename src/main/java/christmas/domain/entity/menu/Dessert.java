@@ -1,4 +1,4 @@
-package christmas.domain.menu;
+package christmas.domain.entity.menu;
 
 import christmas.domain.entity.Money;
 
