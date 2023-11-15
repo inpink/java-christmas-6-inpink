@@ -12,6 +12,7 @@ import christmas.domain.entity.menu.Item;
 import christmas.domain.entity.menu.ItemCount;
 import christmas.domain.entity.menu.Items;
 import christmas.domain.entity.menu.Menu;
+import christmas.util.LocalDateUtil;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
@@ -22,7 +23,7 @@ import java.time.LocalDate;
 //중앙집중화된 로직,  일관된 인터페이스(다양한 할인 조건을 쉽게 추가하거나 수정할 수 있다.), 타입 안전성이 보장
 //평일 할인이면서 주말 할인인 경우는 논리적으로 없고, 중복 로직이 많아 하나로 합침
 public enum WeekdayDiscountEvent {
-    DISCOUNT_CONDITIONS(WEEKDAY, DESSERTS, 1, 31);
+    WEEKDAY_DISCOUNT_CONDITIONS(WEEKDAY, DESSERTS, 1, 31);
 
     private final WeekType validWeekType;
     private final Menu validMenu;
@@ -59,14 +60,16 @@ public enum WeekdayDiscountEvent {
 
     private static boolean isApplicable(final LocalDate date, final Menu menu) {
         return isDateInValidWeekType(date) &&
-                DISCOUNT_CONDITIONS.validMenu == menu &&
-                !date.isBefore(DISCOUNT_CONDITIONS.startDate) &&
-                !date.isAfter(DISCOUNT_CONDITIONS.endDate);
+                WEEKDAY_DISCOUNT_CONDITIONS.validMenu == menu &&
+                LocalDateUtil.isWithinDateRange(
+                        date,
+                        WEEKDAY_DISCOUNT_CONDITIONS.startDate,
+                        WEEKDAY_DISCOUNT_CONDITIONS.endDate);
     }
 
     private static boolean isDateInValidWeekType(final LocalDate date) {
         final DayOfWeek dayOfWeek = date.getDayOfWeek();
-        final WeekType currentWeekType = DISCOUNT_CONDITIONS.validWeekType;
+        final WeekType currentWeekType = WEEKDAY_DISCOUNT_CONDITIONS.validWeekType;
 
         return currentWeekType.contains(dayOfWeek);
     }

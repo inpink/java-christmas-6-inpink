@@ -5,6 +5,7 @@ import static christmas.constants.IntegerConstants.THIS_YEAR;
 import static christmas.domain.entity.event.SpecialDiscountEvent.DiscountAmount.STANDARD;
 
 import christmas.domain.entity.Money;
+import christmas.util.LocalDateUtil;
 import java.time.LocalDate;
 
 public enum SpecialDiscountEvent {
@@ -31,8 +32,10 @@ public enum SpecialDiscountEvent {
 
     private static boolean isMeetingConditions(final LocalDate date) {
         return Starred.YES == Starred.findStarred(date) &&
-                !date.isBefore(SPECIAL_DISCOUNT_CONDITIONS.startDate) &&
-                !date.isAfter(SPECIAL_DISCOUNT_CONDITIONS.endDate);
+                LocalDateUtil.isWithinDateRange(
+                        date,
+                        SPECIAL_DISCOUNT_CONDITIONS.startDate,
+                        SPECIAL_DISCOUNT_CONDITIONS.endDate);
     }
 
     private static Money calcDiscountPrice() {

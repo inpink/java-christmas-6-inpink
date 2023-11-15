@@ -11,11 +11,12 @@ import christmas.domain.entity.menu.Item;
 import christmas.domain.entity.menu.ItemCount;
 import christmas.domain.entity.menu.Items;
 import christmas.domain.entity.menu.Menu;
+import christmas.util.LocalDateUtil;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public enum WeekendDiscountEvent {
-    DISCOUNT_CONDITIONS(WEEKEND, MAIN_DISHES, 1, 31);
+    WEEKEND_DISCOUNT_CONDITIONS(WEEKEND, MAIN_DISHES, 1, 31);
 
     private final WeekType validWeekType;
     private final Menu validMenu;
@@ -49,14 +50,16 @@ public enum WeekendDiscountEvent {
 
     private static boolean isApplicable(final LocalDate date, final Menu menu) {
         return isDateInValidWeekType(date) &&
-                DISCOUNT_CONDITIONS.validMenu == menu &&
-                !date.isBefore(DISCOUNT_CONDITIONS.startDate) &&
-                !date.isAfter(DISCOUNT_CONDITIONS.endDate);
+                WEEKEND_DISCOUNT_CONDITIONS.validMenu == menu &&
+                LocalDateUtil.isWithinDateRange(
+                        date,
+                        WEEKEND_DISCOUNT_CONDITIONS.startDate,
+                        WEEKEND_DISCOUNT_CONDITIONS.endDate);
     }
 
     private static boolean isDateInValidWeekType(final LocalDate date) {
         DayOfWeek dayOfWeek = date.getDayOfWeek();
-        WeekType currentWeekType = DISCOUNT_CONDITIONS.validWeekType;
+        WeekType currentWeekType = WEEKEND_DISCOUNT_CONDITIONS.validWeekType;
         return currentWeekType.contains(dayOfWeek);
     }
 

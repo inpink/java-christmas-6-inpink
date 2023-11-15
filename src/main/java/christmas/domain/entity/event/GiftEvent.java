@@ -7,6 +7,7 @@ import static christmas.domain.entity.menu.Drink.Champagne;
 
 import christmas.domain.entity.Money;
 import christmas.domain.entity.menu.Item;
+import christmas.util.LocalDateUtil;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -35,8 +36,10 @@ public enum GiftEvent {
 
     private static boolean isMeetingConditions(final LocalDate date, final Money totalOrderPrice) {
         return totalOrderPrice.isBiggerOrSameThan(GIFT_EVENT_CONDITIONS.minimumMoney) &&
-                !date.isBefore(GIFT_EVENT_CONDITIONS.startDate) &&
-                !date.isAfter(GIFT_EVENT_CONDITIONS.endDate);
+                LocalDateUtil.isWithinDateRange(
+                        date,
+                        GIFT_EVENT_CONDITIONS.startDate,
+                        GIFT_EVENT_CONDITIONS.endDate);
     }
 
     private static Gifts createGifts() {
