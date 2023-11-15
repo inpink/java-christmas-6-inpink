@@ -5,6 +5,6 @@ import christmas.domain.entity.order.Order;
 import java.time.LocalDate;
 
 public interface OrderService {
-    Order order(LocalDate dateOfVisit,
-                Items items);
+    Order order(final LocalDate dateOfVisit,
+                final Items items);
 }

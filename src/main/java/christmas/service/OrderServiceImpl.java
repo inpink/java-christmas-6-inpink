@@ -11,9 +11,12 @@ import java.time.LocalDate;
 
 public class OrderServiceImpl implements OrderService {
 
+    private final BenefitsService benefitsService;
     private final Repository memoryOrderRepository;
 
-    public OrderServiceImpl(final Repository memoryOrderRepository) {
+    public OrderServiceImpl(final BenefitsService benefitsService,
+                            final Repository memoryOrderRepository) {
+        this.benefitsService = benefitsService;
         this.memoryOrderRepository = memoryOrderRepository;
     }
 
@@ -21,19 +24,12 @@ public class OrderServiceImpl implements OrderService {
     public Order order(final LocalDate dateOfVisit,
                        final Items items){
 
-        final Benefits benefits = calculateBenefits(dateOfVisit, items);
+        final Benefits benefits = benefitsService.calculate(dateOfVisit, items);
         final Money totalDiscount = benefits.calcTotalDiscount();
         final Badge badge = Badge.getBadgeByPrice(totalDiscount);
 
         final Order order = Order.create(dateOfVisit, items, benefits, badge);
 
         return (Order) memoryOrderRepository.save(order);
-    }
-
-
-    private Benefits calculateBenefits(final LocalDate dateOfVisit,
-                                       final Items items) {
-        final Money totalPrice = items.calcTotalPrice();
-        return Event.findBenefits(dateOfVisit, items, totalPrice);
     }
 }
