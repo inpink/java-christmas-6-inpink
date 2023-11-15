@@ -5,7 +5,7 @@ import christmas.domain.entity.event.Benefits;
 import christmas.domain.entity.menu.Items;
 import java.time.LocalDate;
 
-public class Order {
+public class Order extends IndexModel {
 
     private final LocalDate dateOfVisit;
     private final Items items;
@@ -29,4 +29,19 @@ public class Order {
         return new Order(dateOfVisit, items, benefits, badge);
     }
 
+    public LocalDate getDateOfVisit() {
+        return dateOfVisit;
+    }
+
+    public Items getItems() {
+        return items;
+    }
+
+    public Benefits getBenefits() {
+        return benefits;
+    }
+
+    public Badge getBadge() {
+        return badge;
+    }
 }

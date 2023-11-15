@@ -11,15 +11,14 @@ import christmas.domain.entity.DateOfVisit;
 import christmas.domain.entity.Money;
 import christmas.domain.entity.event.Badge;
 import christmas.domain.entity.event.Benefits;
-import christmas.domain.entity.event.Event;
 import christmas.domain.entity.menu.Items;
 import christmas.domain.entity.order.Order;
 import christmas.service.OrderService;
+import christmas.util.InputUtil;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import christmas.view.StartView;
 import java.time.LocalDate;
-import java.util.function.Supplier;
 
 public class OrderController {
 
@@ -41,22 +40,19 @@ public class OrderController {
     public void order() {
         printStartMessages();
 
-        final LocalDate dateOfVisit = safelyGetInput(
+        final LocalDate dateOfVisit = InputUtil.retryOnInvalidInput(
                 this::inputAndValidateDateOfVisit,
                 INVALID_DATE_RE_ENTER.getMessage()
         );
 
-        final Items items = safelyGetInput(
+        final Items items = InputUtil.retryOnInvalidInput(
                 this::inputAndCreateOrderItems,
                 INVALID_ORDER_RE_ENTER.getMessage()
         );
 
-        final Benefits benefits = calculateBenefits(dateOfVisit, items);
-        final Money totalDiscount = benefits.calcTotalDiscount();
-        final Badge badge = Badge.getBadgeByPrice(totalDiscount); //TODO: Service로 분리
-        final Order order = createOrder(dateOfVisit, items, benefits, badge);
+        final Order order = orderService.order(dateOfVisit, items);
 
-        outputOrder(items, benefits, badge);
+        outputOrder(order);
     }
 
     private void printStartMessages() {
@@ -75,20 +71,11 @@ public class OrderController {
         return Items.create(inputItemsWithCounts);
     }
 
-    private Benefits calculateBenefits(final LocalDate dateOfVisit,
-                                       final Items items) {
-        final Money totalPrice = items.calcTotalPrice();
-        return Event.findBenefits(dateOfVisit, items, totalPrice);
-    }
+    private void outputOrder(final Order order) {
+        final Items items = order.getItems();
+        final Benefits benefits = order.getBenefits();
+        final Badge badge = order.getBadge();
 
-    private Order createOrder(final LocalDate dateOfVisit,
-                              final Items items,
-                              final Benefits benefits,
-                              final Badge badge) {
-        return Order.create(dateOfVisit, items, benefits, badge);
-    }
-
-    private void outputOrder(final Items items, final Benefits benefits, final Badge badge) {
         outputView.outputPreviewTitle();
         outputOrderItems(items);
         outputOrderBenefits(items, benefits);
@@ -118,16 +105,6 @@ public class OrderController {
     private void outputMemberBadge(final Badge badge) {
         final MemberBadgeDto memberBadgeDto = DtoMapper.toMemberBadgeDto(badge.getName());
         outputView.outputThisMonthBadge(memberBadgeDto);
-    }
-
-    private <T> T safelyGetInput(Supplier<T> inputSupplier, String errorMessage) {
-        while (true) {
-            try {
-                return inputSupplier.get();
-            } catch (IllegalArgumentException e) {
-                System.out.println(errorMessage);
-            }
-        }
     }
 }
 
