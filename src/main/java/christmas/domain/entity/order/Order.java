@@ -29,6 +29,10 @@ public class Order extends IndexModel {
         return new Order(dateOfVisit, items, benefits, badge);
     }
 
+    public LocalDate getDateOfVisit() {
+        return dateOfVisit;
+    }
+
     public Items getItems() {
         return items;
     }

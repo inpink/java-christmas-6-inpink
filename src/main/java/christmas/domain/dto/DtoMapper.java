@@ -23,4 +23,8 @@ public class DtoMapper {
                                                       final int trickeryDiscount) {
         return new OrderBenefitsDto(gifts, discounts, priceBeforeDiscount, trickeryDiscount);
     }
+
+    public static OrderDateDto toOrderDateDto(final int date) {
+        return new OrderDateDto(date);
+    }
 }

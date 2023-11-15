@@ -5,8 +5,10 @@ import static christmas.constants.IntegerConstants.THIS_MONTH;
 public enum OutputMessages {
     NOT_EXIST("없음"),
     KOREAN_WON("원"),
+    KOREAN_MONTH("월"),
+    KOREAN_DATE("일"),
     ITEM_COUNT("개"),
-    PREVIEW_TITLE("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"),
+    PREVIEW_TITLE("에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"),
     ORDER_MENU_TITLE("주문 메뉴"),
     TOTAL_PRICE_BEFORE_DISCOUNT_TITLE("할인 전 총주문 금액"),
     GIFT_MENU_TITLE("증정 메뉴"),

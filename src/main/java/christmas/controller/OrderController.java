@@ -6,6 +6,7 @@ import static christmas.messages.ErrorMessages.INVALID_ORDER_RE_ENTER;
 import christmas.domain.dto.DtoMapper;
 import christmas.domain.dto.MemberBadgeDto;
 import christmas.domain.dto.OrderBenefitsDto;
+import christmas.domain.dto.OrderDateDto;
 import christmas.domain.dto.OrderItemsDto;
 import christmas.domain.entity.DateOfVisit;
 import christmas.domain.entity.Money;
@@ -72,14 +73,20 @@ public class OrderController {
     }
 
     private void outputOrder(final Order order) {
+        final LocalDate date = order.getDateOfVisit();
         final Items items = order.getItems();
         final Benefits benefits = order.getBenefits();
         final Badge badge = order.getBadge();
 
-        outputView.outputPreviewTitle();
+        outputPreviewTitle(date);
         outputOrderItems(items);
         outputOrderBenefits(items, benefits);
         outputMemberBadge(badge);
+    }
+
+    private void outputPreviewTitle(final LocalDate date) {
+        final OrderDateDto orderDateDto = DtoMapper.toOrderDateDto(date.getDayOfMonth());
+        outputView.outputPreviewTitle(orderDateDto);
     }
 
     private void outputOrderItems(final Items items) {
