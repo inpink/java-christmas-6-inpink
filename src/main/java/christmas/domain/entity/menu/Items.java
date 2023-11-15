@@ -2,7 +2,6 @@ package christmas.domain.entity.menu;
 
 import static christmas.constants.IntegerConstants.MAX_MENU_ITEM_COUNT;
 import static christmas.constants.StringConstants.SEPERATE_STANDARD;
-import static christmas.messages.ErrorMessages.INVALID_ITEMS_MAP;
 
 import christmas.domain.entity.Money;
 import christmas.util.ExceptionUtil;
@@ -17,7 +16,6 @@ import java.util.Set;
 
 public class Items {
 
-    private static final String errorMessge = INVALID_ITEMS_MAP.getMessage();
     private final Map<Item, ItemCount> items;
 
     private Items(final Map<Item, ItemCount> items) {
@@ -85,7 +83,7 @@ public class Items {
 
     private void validateSumOfCounts() {
         if (calcItemCounts() > MAX_MENU_ITEM_COUNT.getValue()) {
-            ExceptionUtil.throwInvalidValueException(errorMessge);
+            ExceptionUtil.throwInvalidValueException();
         }
     }
 
