@@ -97,8 +97,8 @@ public class ConsoleOutputView implements OutputView {
             System.out.println(NOT_EXIST.getMessage());
         }
         for (Map.Entry<String, Integer> discountEntry : discounts.entrySet()) {
-            System.out.println(discountEntry.getKey() + ": -"
-                    + StringUtil.formatByThousandSeparator(discountEntry.getValue())
+            System.out.println(discountEntry.getKey()
+                    + StringUtil.formatByThousandSeparator(discountEntry.getValue() * -1)
                     + KOREAN_WON.getMessage());
         }
         OutputUtil.printEmptyLine();
@@ -106,8 +106,7 @@ public class ConsoleOutputView implements OutputView {
 
     private void outputSumOfDiscounts(final int sumDiscounts) {
         outputTitle(TOTAL_BENEFITS_PRICE_TITLE.getMessage());
-        System.out.println("-"
-                + StringUtil.formatByThousandSeparator(sumDiscounts)
+        System.out.println(StringUtil.formatByThousandSeparator(sumDiscounts * -1)
                 + KOREAN_WON.getMessage());
         OutputUtil.printEmptyLine();
     }
