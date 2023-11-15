@@ -60,7 +60,7 @@ public class Items {
         final Map<Item, ItemCount> items = new HashMap<>();
 
         for (final String itemNameAndCount : toList(input)) {
-            final String[] parts = itemNameAndCount.split("-"); //TODO: 상수화
+            final String[] parts = itemNameAndCount.split("-");
             IntegerValidator.validateSame(parts.length, 2);
 
             final Item item = Menu.findItem(parts[0]);

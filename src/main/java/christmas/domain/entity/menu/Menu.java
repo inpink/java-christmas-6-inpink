@@ -43,11 +43,6 @@ public enum Menu { //이미 정해져있으니까 enum. 만약 매번 새롭게 
                 .orElseThrow(() -> ExceptionUtil.returnInvalidValueException(NOT_EXIST_MENU.getMessage()));
     }
 
-    public static boolean hasItem(final String itemName) {
-        return getAllItemsStream()
-                .anyMatch(item -> item.hasItem(itemName));
-    }
-
     public boolean contains(final String itemName) {
         return Arrays.stream(items)
                 .anyMatch(item -> item.getName().equalsIgnoreCase(itemName));

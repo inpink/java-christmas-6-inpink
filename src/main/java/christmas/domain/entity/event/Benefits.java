@@ -25,10 +25,6 @@ public class Benefits {
         return new Benefits(new EnumMap<>(Event.class));
     }
 
-    public boolean hasEvent(final Event event) {
-        return benefits.containsKey(event);
-    }
-
     public Money calcTotalDiscount() {
         return benefits.values()
                 .stream()
