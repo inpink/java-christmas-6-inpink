@@ -1,6 +1,8 @@
 package christmas.config;
 
 import christmas.controller.OrderController;
+import christmas.repository.MemoryOrderRepository;
+import christmas.repository.Repository;
 import christmas.service.OrderService;
 import christmas.service.OrderServiceImpl;
 import christmas.view.ConsoleInputView;
@@ -41,13 +43,19 @@ public class AppConfig implements Config {
         return LazyHolder.outputView;
     }
 
+    @Override
+    public Repository memoryOrderRepository() {
+        return LazyHolder.memoryOrderRepository;
+    }
+
     private static class LazyHolder {
         private static final AppConfig INSTANCE = new AppConfig();
         private static final StartView startView = createStartView();
         private static final InputView inputView = createInputView();
         private static final OutputView outputView = createOutputView();
-        private static final OrderController orderController = createOrderController();
+        private static final Repository memoryOrderRepository = createMemoryOrderRepository();
         private static final OrderService orderService = createOrderService();
+        private static final OrderController orderController = createOrderController();
 
         private static OrderController createOrderController() {
             return new OrderController(
@@ -58,7 +66,7 @@ public class AppConfig implements Config {
         }
 
         private static OrderService createOrderService() {
-            return new OrderServiceImpl();
+            return new OrderServiceImpl(memoryOrderRepository);
         }
 
         private static StartView createStartView() {
@@ -73,7 +81,8 @@ public class AppConfig implements Config {
             return new ConsoleOutputView();
         }
 
-
-
+        private static Repository createMemoryOrderRepository() {
+            return new MemoryOrderRepository();
+        }
     }
 }

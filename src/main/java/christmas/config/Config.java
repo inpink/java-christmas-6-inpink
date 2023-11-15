@@ -1,6 +1,7 @@
 package christmas.config;
 
 import christmas.controller.OrderController;
+import christmas.repository.Repository;
 import christmas.service.OrderService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -16,4 +17,6 @@ public interface Config {
     InputView inputView();
 
     OutputView outputView();
+
+    Repository memoryOrderRepository();
 }
