@@ -7,9 +7,10 @@ import static christmas.domain.entity.event.ChristmasDayDiscountEvent.DiscountAm
 import static java.time.temporal.ChronoUnit.DAYS;
 
 import christmas.domain.entity.Money;
+import christmas.util.LocalDateUtil;
 import java.time.LocalDate;
 
-public enum ChristmasDayDiscountEvent { //정해진 조건을 상수로 관리한다는 느낌을 더욱 주고 싱글톤의 장점도
+public enum ChristmasDayDiscountEvent {
     CHRISTMAS_DAY_DISCOUNT_CONDITIONS(1, 25);
 
     private final LocalDate startDate;
@@ -28,8 +29,10 @@ public enum ChristmasDayDiscountEvent { //정해진 조건을 상수로 관리�
     }
 
     private static boolean isMeetingConditions(final LocalDate date) {
-        return !(date.isBefore(CHRISTMAS_DAY_DISCOUNT_CONDITIONS.startDate)
-                || date.isAfter(CHRISTMAS_DAY_DISCOUNT_CONDITIONS.endDate));
+        return LocalDateUtil.isWithinDateRange(
+                date,
+                CHRISTMAS_DAY_DISCOUNT_CONDITIONS.startDate,
+                CHRISTMAS_DAY_DISCOUNT_CONDITIONS.endDate);
     }
 
     private static Money calcDiscountPrice(final LocalDate date) {

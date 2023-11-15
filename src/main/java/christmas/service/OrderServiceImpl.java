@@ -3,7 +3,6 @@ package christmas.service;
 import christmas.domain.entity.Money;
 import christmas.domain.entity.event.Badge;
 import christmas.domain.entity.event.Benefits;
-import christmas.domain.entity.event.Event;
 import christmas.domain.entity.menu.Items;
 import christmas.domain.entity.order.Order;
 import christmas.repository.Repository;
